@@ -1,13 +1,9 @@
 fileFormatVersion: 2
-guid: b9524269e2a4095479f68035378e6a79
-timeCreated: 1471917012
+guid: 878c8e8cdbc05ea4f96ea1f99b73b0b9
+timeCreated: 1471920618
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: d_pad_up
-    21300002: d_pad_down
-    21300004: d_pad_0
-    21300006: d_pad_1
+  fileIDToRecycleName: {}
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -34,7 +30,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     filterMode: -1
-    aniso: 16
+    aniso: -1
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
@@ -42,7 +38,7 @@ TextureImporter:
   rGBM: 0
   compressionQuality: 50
   allowsAlphaSplitting: 0
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -53,105 +49,7 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites:
-    - name: d_pad_up
-      rect:
-        serializedVersion: 2
-        x: 174
-        y: 310
-        width: 150
-        height: 180
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 43, y: 90}
-        - {x: -8, y: 90}
-        - {x: -24, y: 89}
-        - {x: -75, y: 30}
-        - {x: -75, y: 3}
-        - {x: -40, y: -90}
-        - {x: 55, y: -90}
-        - {x: 75, y: 13}
-        - {x: 75, y: 32}
-        - {x: 61, y: 51}
-    - name: d_pad_down
-      rect:
-        serializedVersion: 2
-        x: 179
-        y: 10
-        width: 150
-        height: 180
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 57, y: 77}
-        - {x: -20, y: 77}
-        - {x: -21, y: 75}
-        - {x: -21, y: 72}
-        - {x: -26, y: 74}
-        - {x: -44, y: 75}
-        - {x: -49, y: 28}
-        - {x: -46, y: 26}
-        - {x: -44, y: 26}
-        - {x: -73, y: -8}
-        - {x: -70, y: -11}
-        - {x: -57, y: -21}
-        - {x: -50, y: -24}
-        - {x: -48, y: -24}
-        - {x: -51, y: -27}
-        - {x: -58, y: -20}
-        - {x: -69, y: -13}
-        - {x: -74, y: -10}
-        - {x: -75, y: -10}
-        - {x: -75, y: -21}
-        - {x: -57, y: -34}
-        - {x: 2, y: -74}
-        - {x: 13, y: -74}
-        - {x: 66, y: -41}
-        - {x: 75, y: -32}
-        - {x: 75, y: 33}
-    - name: d_pad_0
-      rect:
-        serializedVersion: 2
-        x: 14
-        y: 183
-        width: 180
-        height: 150
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -46, y: 71}
-        - {x: -74, y: 29}
-        - {x: -74, y: -51}
-        - {x: -66, y: -64}
-        - {x: 70, y: -64}
-        - {x: 76, y: -37}
-        - {x: 76, y: 36}
-        - {x: 22, y: 71}
-    - name: d_pad_1
-      rect:
-        serializedVersion: 2
-        x: 306
-        y: 178
-        width: 180
-        height: 150
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 12, y: 75}
-        - {x: 5, y: 68}
-        - {x: -75, y: 33}
-        - {x: -75, y: -29}
-        - {x: 10, y: -65}
-        - {x: 28, y: -65}
-        - {x: 39, y: -64}
-        - {x: 85, y: -33}
-        - {x: 85, y: -8}
-        - {x: 32, y: 75}
+    sprites: []
     outline: []
   spritePackingTag: 
   userData: 
