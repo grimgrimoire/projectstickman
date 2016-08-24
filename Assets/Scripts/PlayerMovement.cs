@@ -4,6 +4,8 @@ using System.Collections;
 public class PlayerMovement : MonoBehaviour
 {
 
+	public GameObject bullet;
+
 	float moveSpeed = 5f;
 	float jumpHeight = 8f;
 	Rigidbody2D rigid;
@@ -33,17 +35,30 @@ public class PlayerMovement : MonoBehaviour
 	//		}
 	//	}
 
+	public void ShootBullet (Vector3 direction)
+	{
+		GameObject bullets = Instantiate (bullet, transform.position, transform.rotation) as GameObject;
+		if (direction == Vector3.zero) {
+			bullets.GetComponent<Rigidbody2D> ().velocity = Vector2.right * transform.localScale.x;
+			Debug.DrawRay (transform.position, (Vector3.right * transform.localScale.x) * 10, Color.red, 1f);
+		} else {
+			bullets.GetComponent<Rigidbody2D> ().velocity = new Vector2 (direction.x , direction.y );
+		}
+			
+	}
+
 	public void MoveRight (float multiplier)
 	{
 		CheckCollision ();
 		if (!right)
 			rigid.velocity = new Vector2 (moveSpeed * multiplier, rigid.velocity.y);
-		transform.localScale = new Vector3(1, 1, 1);
+		transform.localScale = new Vector3 (1, 1, 1);
 	}
 
 	private void CheckCollision ()
 	{
 		right = Physics.Linecast (transform.position, transform.position + Vector3.right);
+		Debug.DrawLine (transform.position, transform.position + Vector3.right, Color.blue);
 	}
 
 	public void MoveLeft (float multiplier)
@@ -51,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
 		CheckCollision ();
 		if (!left)
 			rigid.velocity = new Vector2 (-moveSpeed * multiplier, rigid.velocity.y);
-		transform.localScale = new Vector3(-1, 1, 1);
+		transform.localScale = new Vector3 (-1, 1, 1);
 	}
 
 	public void Jump ()

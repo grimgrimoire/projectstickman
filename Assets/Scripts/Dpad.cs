@@ -5,21 +5,22 @@ using UnityEngine.EventSystems;
 public class Dpad : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
 
-	public RectTransform button;
+	public RectTransform directionalPad;
 	public PlayerMovement player;
+
+	public AudioClip gunShot;
+	public AudioSource source;
 
 	int moveRange = 80;
 	int baseX;
 	int baseY;
-	string horizontalAxis = "Horizontal";
-	string verticalAxis = "Vertical";
 	bool isPointerDown = false;
 
 	// Use this for initialization
 	void Start ()
 	{
-		baseX = (int)button.position.x;
-		baseY = (int)button.position.y;
+		baseX = (int)directionalPad.position.x;
+		baseY = (int)directionalPad.position.y;
 	}
 	
 	// Update is called once per frame
@@ -28,6 +29,15 @@ public class Dpad : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDrag
 		if(isPointerDown){
 			UpdatePlayer ();
 		}
+
+		if(Input.GetKeyDown(KeyCode.Space)){
+			OnShootButton ();
+		}
+	}
+
+	public void OnShootButton(){
+		source.PlayOneShot (gunShot);
+		player.ShootBullet (directionalPad.anchoredPosition3D);
 	}
 
 	public void OnDrag (PointerEventData data)
@@ -38,7 +48,7 @@ public class Dpad : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDrag
 	public void OnPointerUp (PointerEventData data)
 	{
 		isPointerDown = false;
-		button.anchoredPosition = Vector2.zero;
+		directionalPad.anchoredPosition = Vector2.zero;
 		player.Stop ();
 	}
 
@@ -57,13 +67,13 @@ public class Dpad : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDrag
 		delta = (int)(data.position.y - baseY);
 		delta = Mathf.Clamp (delta, -moveRange, moveRange);
 		newPos.y = delta;
-		button.anchoredPosition = newPos;
+		directionalPad.anchoredPosition = newPos;
 	}
 
 	private void UpdatePlayer(){
-		if (button.anchoredPosition.x < 0)
-			player.MoveLeft (-button.anchoredPosition.x / 80);
-		else if(button.anchoredPosition.x > 0)
-			player.MoveRight (button.anchoredPosition.x / 80);
+		if (directionalPad.anchoredPosition.x < 0)
+			player.MoveLeft (-directionalPad.anchoredPosition.x / 80);
+		else if(directionalPad.anchoredPosition.x > 0)
+			player.MoveRight (directionalPad.anchoredPosition.x / 80);
 	}
 }
