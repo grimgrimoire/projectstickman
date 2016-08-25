@@ -37,6 +37,8 @@ public class PlayerMovement : MonoBehaviour
 
 	public void ShootBullet (Vector3 direction)
 	{
+		if (bullet == null)
+			return;
 		GameObject bullets = Instantiate (bullet, transform.position, transform.rotation) as GameObject;
 		if (direction == Vector3.zero) {
 			bullets.GetComponent<Rigidbody2D> ().velocity = Vector2.right * transform.localScale.x;
@@ -50,22 +52,19 @@ public class PlayerMovement : MonoBehaviour
 	public void MoveRight (float multiplier)
 	{
 		CheckCollision ();
-		if (!right)
-			rigid.velocity = new Vector2 (moveSpeed * multiplier, rigid.velocity.y);
+		rigid.velocity = new Vector2 (moveSpeed * multiplier, rigid.velocity.y);
 		transform.localScale = new Vector3 (1, 1, 1);
 	}
 
 	private void CheckCollision ()
 	{
-		right = Physics.Linecast (transform.position, transform.position + Vector3.right);
-		Debug.DrawLine (transform.position, transform.position + Vector3.right, Color.blue);
+		
 	}
 
 	public void MoveLeft (float multiplier)
 	{
 		CheckCollision ();
-		if (!left)
-			rigid.velocity = new Vector2 (-moveSpeed * multiplier, rigid.velocity.y);
+		rigid.velocity = new Vector2 (-moveSpeed * multiplier, rigid.velocity.y);
 		transform.localScale = new Vector3 (-1, 1, 1);
 	}
 

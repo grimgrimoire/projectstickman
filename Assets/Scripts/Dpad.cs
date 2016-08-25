@@ -30,13 +30,22 @@ public class Dpad : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDrag
 			UpdatePlayer ();
 		}
 
-		if(Input.GetKeyDown(KeyCode.Space)){
+		if(Input.GetKeyDown(KeyCode.X)){
 			OnShootButton ();
+		}
+
+		if(Input.GetKeyDown(KeyCode.Z)){
+			OnJumpButton ();
 		}
 	}
 
+	public void OnJumpButton(){
+		player.Jump ();
+	}
+
 	public void OnShootButton(){
-		source.PlayOneShot (gunShot);
+		if(gunShot!=null)
+			source.PlayOneShot (gunShot);
 		player.ShootBullet (directionalPad.anchoredPosition3D);
 	}
 
