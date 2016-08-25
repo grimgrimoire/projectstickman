@@ -1,29 +1,29 @@
 fileFormatVersion: 2
-guid: 5a3ec4593fcfa184894b735d23f2cdde
-timeCreated: 1471933127
+guid: 4a6a62292dd9d3e489cbda64de24d760
+timeCreated: 1472108415
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Weapon_0
-    21300002: Weapon_1
-    21300004: Weapon_2
-    21300006: Weapon_3
-    21300008: Weapon_4
-    21300010: Weapon_5
-    21300012: Weapon_6
-    21300014: Weapon_7
-    21300016: Weapon_8
-    21300018: Weapon_9
-    21300020: Weapon_10
-    21300022: Weapon_11
-    21300024: Weapon_12
-    21300026: Weapon_13
-    21300028: Weapon_14
-    21300030: Weapon_15
-    21300032: Automatic1
-    21300034: Weapon_17
-    21300036: Weapon_18
-    21300038: Weapon_19
+    21300000: Weapon1_0
+    21300002: Weapon1_1
+    21300004: Weapon1_2
+    21300006: Weapon1_3
+    21300008: Weapon1_4
+    21300010: Weapon1_5
+    21300012: Weapon1_6
+    21300014: Weapon1_7
+    21300016: Weapon1_8
+    21300018: Weapon1_9
+    21300020: Weapon1_10
+    21300022: Weapon1_11
+    21300024: Weapon1_12
+    21300026: Weapon1_13
+    21300028: Weapon1_14
+    21300030: Weapon1_15
+    21300032: Weapon1_16
+    21300034: Weapon1_17
+    21300036: Weapon1_18
+    21300038: Weapon1_19
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -73,262 +73,262 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Weapon_0
+      name: Weapon1_0
       rect:
         serializedVersion: 2
-        x: 67
-        y: 2468
-        width: 252
-        height: 136
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 18
+        y: 713
+        width: 68
+        height: 40
+      alignment: 9
+      pivot: {x: 0.1560434, y: 0.3258255}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Weapon_1
+      name: Weapon1_1
       rect:
         serializedVersion: 2
-        x: 1194
-        y: 2462
-        width: 369
-        height: 157
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Weapon_2
-      rect:
-        serializedVersion: 2
-        x: 67
-        y: 2260
-        width: 252
-        height: 140
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Weapon_3
-      rect:
-        serializedVersion: 2
-        x: 424
-        y: 2229
-        width: 270
-        height: 176
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Weapon_4
-      rect:
-        serializedVersion: 2
-        x: 1194
-        y: 2237
-        width: 425
-        height: 156
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Weapon_5
-      rect:
-        serializedVersion: 2
-        x: 67
-        y: 2032
-        width: 200
-        height: 118
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Weapon_6
-      rect:
-        serializedVersion: 2
-        x: 1194
-        y: 1982
-        width: 369
-        height: 211
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Weapon_7
-      rect:
-        serializedVersion: 2
-        x: 67
-        y: 1850
-        width: 250
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Weapon_8
-      rect:
-        serializedVersion: 2
-        x: 397
-        y: 1824
-        width: 300
-        height: 208
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Weapon_9
-      rect:
-        serializedVersion: 2
-        x: 67
-        y: 1588
-        width: 312
-        height: 124
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Weapon_10
-      rect:
-        serializedVersion: 2
-        x: 470
-        y: 1583
-        width: 215
-        height: 132
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Weapon_11
-      rect:
-        serializedVersion: 2
-        x: 910
-        y: 1602
-        width: 703
-        height: 212
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Weapon_12
-      rect:
-        serializedVersion: 2
-        x: 50
-        y: 1322
-        width: 392
-        height: 230
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Weapon_13
-      rect:
-        serializedVersion: 2
-        x: 863
-        y: 1280
-        width: 688
-        height: 244
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Weapon_14
-      rect:
-        serializedVersion: 2
-        x: 910
-        y: 1011
-        width: 780
-        height: 175
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Weapon_15
-      rect:
-        serializedVersion: 2
-        x: 910
-        y: 737
-        width: 836
-        height: 181
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Automatic1
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 391
-        width: 888
-        height: 277
+        x: 320
+        y: 711
+        width: 100
+        height: 46
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Weapon_17
+      name: Weapon1_2
       rect:
         serializedVersion: 2
-        x: 910
-        y: 388
-        width: 879
-        height: 251
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 18
+        y: 653
+        width: 68
+        height: 41
+      alignment: 9
+      pivot: {x: 0.16383381, y: 0.40707472}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Weapon_18
+      name: Weapon1_3
       rect:
         serializedVersion: 2
-        x: 118
+        x: 114
+        y: 644
+        width: 72
+        height: 51
+      alignment: 9
+      pivot: {x: 0.22484165, y: 0.39541447}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Weapon1_4
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 646
+        width: 114
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Weapon1_5
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 587
+        width: 54
+        height: 34
+      alignment: 9
+      pivot: {x: 0.18956506, y: 0.4327662}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Weapon1_6
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 573
+        width: 100
+        height: 61
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Weapon1_7
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 535
+        width: 67
+        height: 37
+      alignment: 9
+      pivot: {x: 0.14744362, y: 0.39702874}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Weapon1_8
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 527
+        width: 81
+        height: 60
+      alignment: 9
+      pivot: {x: 0.22719358, y: 0.38570353}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Weapon1_9
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 459
+        width: 84
+        height: 36
+      alignment: 9
+      pivot: {x: 0.109940484, y: 0.43650055}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Weapon1_10
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 457
+        width: 58
+        height: 39
+      alignment: 9
+      pivot: {x: 0.18469922, y: 0.48046172}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Weapon1_11
+      rect:
+        serializedVersion: 2
+        x: 244
+        y: 463
+        width: 189
+        height: 61
+      alignment: 9
+      pivot: {x: 0.32919458, y: 0.39822787}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Weapon1_12
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 382
+        width: 106
+        height: 66
+      alignment: 9
+      pivot: {x: 0.14057703, y: 0.30373266}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Weapon1_13
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 370
+        width: 184
+        height: 71
+      alignment: 9
+      pivot: {x: 0.38865876, y: 0.44753727}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Weapon1_14
+      rect:
+        serializedVersion: 2
+        x: 244
+        y: 291
+        width: 210
+        height: 51
+      alignment: 9
+      pivot: {x: 0.43468773, y: 0.57470286}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Weapon1_15
+      rect:
+        serializedVersion: 2
+        x: 244
+        y: 213
+        width: 224
+        height: 52
+      alignment: 9
+      pivot: {x: 0.33782688, y: 0.47474816}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Weapon1_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 113
+        width: 238
+        height: 80
+      alignment: 9
+      pivot: {x: 0.28330407, y: 0.20509776}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Weapon1_17
+      rect:
+        serializedVersion: 2
+        x: 244
+        y: 112
+        width: 236
+        height: 73
+      alignment: 9
+      pivot: {x: 0.37085143, y: 0.38518158}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Weapon1_18
+      rect:
+        serializedVersion: 2
+        x: 32
         y: 0
-        width: 676
-        height: 216
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 181
+        height: 62
+      alignment: 9
+      pivot: {x: 0.11690675, y: 0.4754197}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Weapon_19
+      name: Weapon1_19
       rect:
         serializedVersion: 2
-        x: 910
-        y: 12
-        width: 549
-        height: 244
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 244
+        y: 3
+        width: 147
+        height: 71
+      alignment: 9
+      pivot: {x: 0.17862208, y: 0.38194707}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
