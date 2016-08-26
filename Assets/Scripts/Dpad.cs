@@ -26,25 +26,27 @@ public class Dpad : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDrag
 	// Update is called once per frame
 	void Update ()
 	{
-		if(isPointerDown){
+		if (isPointerDown) {
 			UpdatePlayer ();
 		}
 
-		if(Input.GetKeyDown(KeyCode.X)){
+		if (Input.GetKeyDown (KeyCode.X)) {
 			OnShootButton ();
 		}
 
-		if(Input.GetKeyDown(KeyCode.Z)){
+		if (Input.GetKeyDown (KeyCode.Z)) {
 			OnJumpButton ();
 		}
 	}
 
-	public void OnJumpButton(){
+	public void OnJumpButton ()
+	{
 		player.Jump ();
 	}
 
-	public void OnShootButton(){
-		if(gunShot!=null)
+	public void OnShootButton ()
+	{
+		if (gunShot != null && source != null)
 			source.PlayOneShot (gunShot);
 		player.ShootBullet (directionalPad.anchoredPosition3D);
 	}
@@ -58,6 +60,7 @@ public class Dpad : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDrag
 	{
 		isPointerDown = false;
 		directionalPad.anchoredPosition = Vector2.zero;
+		player.UpdateAim (0);
 		player.Stop ();
 	}
 
@@ -79,10 +82,24 @@ public class Dpad : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDrag
 		directionalPad.anchoredPosition = newPos;
 	}
 
-	private void UpdatePlayer(){
+	private float GetAngle ()
+	{
+		float angle = Vector2.Angle (Vector2.right, directionalPad.anchoredPosition);
+		if (angle > 90) {
+			angle = 180 - angle;
+		}
+		if (directionalPad.anchoredPosition.y < 0)
+			angle = -angle;
+		Debug.Log (angle);
+		return angle;
+	}
+
+	private void UpdatePlayer ()
+	{
 		if (directionalPad.anchoredPosition.x < 0)
 			player.MoveLeft (-directionalPad.anchoredPosition.x / 80);
-		else if(directionalPad.anchoredPosition.x > 0)
+		else if (directionalPad.anchoredPosition.x > 0)
 			player.MoveRight (directionalPad.anchoredPosition.x / 80);
+		player.UpdateAim (GetAngle ());
 	}
 }
