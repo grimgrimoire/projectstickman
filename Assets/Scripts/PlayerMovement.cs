@@ -8,9 +8,6 @@ public class PlayerMovement : MonoBehaviour
 	public GameObject playerAimingArm;
 
 	float defaultAim = 300;
-	Animator anim;
-	int walkHash = Animator.StringToHash ("Walk");
-	int IdleHash = Animator.StringToHash ("Idle");
 	float moveSpeed = 5f;
 	float jumpHeight = 8f;
 	Rigidbody2D rigid;
@@ -19,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
 
 	// Use this for initialization
 	void Start ()
-	{
+	{	
 		rigid = GetComponent<Rigidbody2D> ();
 		anim = GetComponent<Animator> ();
 //		StartCoroutine (Automatic ());
@@ -73,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
 		CheckCollision ();
 		rigid.velocity = new Vector2 (moveSpeed * multiplier, rigid.velocity.y);
 		transform.localScale = new Vector3 (1, 1, 1);
-		PlayAnimation (walkHash);
+		//anim.Play (walkHash);
 	}
 
 	private void CheckCollision ()
