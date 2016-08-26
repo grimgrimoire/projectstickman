@@ -6,9 +6,6 @@ public class PlayerMovement : MonoBehaviour
 
 	public GameObject bullet;
 
-	Animator anim;
-	int walkHash = Animator.StringToHash("Walk");
-	int IdleHash = Animator.StringToHash("Idle");
 	float moveSpeed = 5f;
 	float jumpHeight = 8f;
 	Rigidbody2D rigid;
@@ -17,9 +14,8 @@ public class PlayerMovement : MonoBehaviour
 
 	// Use this for initialization
 	void Start ()
-	{
+	{	
 		rigid = GetComponent<Rigidbody2D> ();
-		anim = GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
@@ -57,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
 		if (!right)
 			rigid.velocity = new Vector2 (moveSpeed * multiplier, rigid.velocity.y);
 		transform.localScale = new Vector3 (1, 1, 1);
-		anim.Play (walkHash);
+		//anim.Play (walkHash);
 	}
 
 	private void CheckCollision ()
@@ -72,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
 		if (!left)
 			rigid.velocity = new Vector2 (-moveSpeed * multiplier, rigid.velocity.y);
 		transform.localScale = new Vector3 (-1, 1, 1);
-		anim.Play (walkHash);
+		//anim.Play (walkHash);
 	}
 
 	public void Jump ()
@@ -85,6 +81,5 @@ public class PlayerMovement : MonoBehaviour
 	public void Stop ()
 	{
 		rigid.velocity = new Vector2 (0, rigid.velocity.y);
-		anim.Play (IdleHash);
 	}
 }
