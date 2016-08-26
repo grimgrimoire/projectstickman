@@ -18,7 +18,6 @@ public class PlayerMovement : MonoBehaviour
 	void Start ()
 	{	
 		rigid = GetComponent<Rigidbody2D> ();
-		anim = GetComponent<Animator> ();
 //		StartCoroutine (Automatic ());
 	}
 	
@@ -83,7 +82,6 @@ public class PlayerMovement : MonoBehaviour
 		CheckCollision ();
 		rigid.velocity = new Vector2 (-moveSpeed * multiplier, rigid.velocity.y);
 		transform.localScale = new Vector3 (-1, 1, 1);
-		PlayAnimation (walkHash);
 	}
 
 	public void Jump ()
@@ -96,12 +94,6 @@ public class PlayerMovement : MonoBehaviour
 	public void Stop ()
 	{
 		rigid.velocity = new Vector2 (0, rigid.velocity.y);
-		PlayAnimation (IdleHash);
 	}
 
-	private void PlayAnimation (int aniHash)
-	{
-		if (anim != null)
-			anim.Play (aniHash);
-	}
 }

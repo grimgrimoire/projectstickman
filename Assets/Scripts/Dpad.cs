@@ -98,12 +98,12 @@ public class Dpad : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDrag
 
 	private void UpdatePlayer ()
 	{
-		if (directionalPad.anchoredPosition.x < 0)
+		if (directionalPad.anchoredPosition.x < 0){
 			player.MoveLeft (-directionalPad.anchoredPosition.x / 80);
 		} else if (directionalPad.anchoredPosition.x > 0) {
 			player.MoveRight (directionalPad.anchoredPosition.x / 80);
-		player.UpdateAim (GetAngle ());
 		} 
+		player.UpdateAim (GetAngle ());
 		anim.startanimation (directionalPad.anchoredPosition.x);
 	}
 
