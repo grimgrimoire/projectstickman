@@ -67,7 +67,7 @@ public class PlayerMovement : MonoBehaviour
 	public void MoveRight (float multiplier)
 	{
 		CheckCollision ();
-		rigid.velocity = new Vector2 (moveSpeed * multiplier, rigid.velocity.y);
+		rigid.velocity = new Vector2 (moveSpeed, rigid.velocity.y);
 		transform.localScale = new Vector3 (1, 1, 1);
 		//anim.Play (walkHash);
 	}
@@ -80,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
 	public void MoveLeft (float multiplier)
 	{
 		CheckCollision ();
-		rigid.velocity = new Vector2 (-moveSpeed * multiplier, rigid.velocity.y);
+		rigid.velocity = new Vector2 (-moveSpeed, rigid.velocity.y);
 		transform.localScale = new Vector3 (-1, 1, 1);
 	}
 

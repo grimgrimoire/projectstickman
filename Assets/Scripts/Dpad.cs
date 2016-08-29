@@ -92,7 +92,6 @@ public class Dpad : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDrag
 		}
 		if (directionalPad.anchoredPosition.y < 0)
 			angle = -angle;
-		Debug.Log (angle);
 		return angle;
 	}
 
