@@ -6,6 +6,8 @@ public class PlayerMovement : MonoBehaviour
 	public GameObject weaponTarget;
 	public Light weaponLight;
 	public GameObject playerAimingArm;
+	public StartAnimasi anim;
+	public GunScript gun;
 
 	float defaultAim = 300;
 	float moveSpeed = 5f;
@@ -13,40 +15,27 @@ public class PlayerMovement : MonoBehaviour
 	Rigidbody2D rigid;
 	bool right;
 	bool left;
+	IEnumerator shootingCoroutine;
 
 	// Use this for initialization
 	void Start ()
 	{	
 		rigid = GetComponent<Rigidbody2D> ();
-//		StartCoroutine (Automatic ());
+		shootingCoroutine = AutomaticShooting ();
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
-		
 	}
 
-	IEnumerator Automatic ()
+	IEnumerator AutomaticShooting ()
 	{
 		do {
-			ShootBullet (Vector3.zero);
-			yield return new WaitForSeconds (0.1f);
+			ShootBullet ();
+			gun.ShootBullet(new GunParameter());
+			yield return new WaitForSeconds (0.3f);
 		} while(true);
-	}
-
-	public void ShootBullet (Vector3 direction)
-	{
-		RaycastHit2D hit = Physics2D.Raycast (weaponTarget.transform.position, weaponTarget.transform.right * transform.localScale.x, Mathf.Infinity);
-		if (hit) {
-			Debug.Log (hit.collider.gameObject.tag);
-			Debug.DrawLine (weaponTarget.transform.position, hit.point, Color.yellow, 0.5f);
-			StartCoroutine (ShowGunFire ());
-			if (hit.collider.gameObject.tag == "Hostile") {
-				hit.rigidbody.AddForce (new Vector2 (255, 0));
-				hit.rigidbody.AddTorque (22f);
-			}
-		}
 	}
 
 	IEnumerator ShowGunFire ()
@@ -59,6 +48,16 @@ public class PlayerMovement : MonoBehaviour
 		}
 	}
 
+	public void HoldTrigger ()
+	{
+		StartCoroutine (shootingCoroutine);
+	}
+
+	public void RemoveTrigger ()
+	{
+		StopCoroutine (shootingCoroutine);
+	}
+
 	public void UpdateAim (float angle)
 	{
 		playerAimingArm.transform.localEulerAngles = new Vector3 (0, 0, 300 + angle);
@@ -68,8 +67,7 @@ public class PlayerMovement : MonoBehaviour
 	{
 		CheckCollision ();
 		rigid.velocity = new Vector2 (moveSpeed, rigid.velocity.y);
-		transform.localScale = new Vector3 (1, 1, 1);
-		//anim.Play (walkHash);
+		anim.startanimation (1);
 	}
 
 	private void CheckCollision ()
@@ -81,6 +79,16 @@ public class PlayerMovement : MonoBehaviour
 	{
 		CheckCollision ();
 		rigid.velocity = new Vector2 (-moveSpeed, rigid.velocity.y);
+		anim.startanimation (1);
+	}
+
+	public void LookRight ()
+	{
+		transform.localScale = new Vector3 (1, 1, 1);
+	}
+
+	public void LookLeft ()
+	{
 		transform.localScale = new Vector3 (-1, 1, 1);
 	}
 
@@ -94,6 +102,23 @@ public class PlayerMovement : MonoBehaviour
 	public void Stop ()
 	{
 		rigid.velocity = new Vector2 (0, rigid.velocity.y);
+		anim.stopanimation (Vector2.zero);
+	}
+
+	private void ShootBullet ()
+	{
+		Vector2 target = weaponTarget.transform.right * transform.localScale.x;
+		target += (Random.insideUnitCircle) * 0.05f;
+		RaycastHit2D hit = Physics2D.Raycast (weaponTarget.transform.position, target, Mathf.Infinity);
+		if (hit) {
+			Debug.Log (hit.collider.gameObject.tag);
+			Debug.DrawLine (weaponTarget.transform.position, hit.point, Color.yellow, 0.5f);
+			StartCoroutine (ShowGunFire ());
+			if (hit.collider.gameObject.tag == "xxx") {
+				hit.rigidbody.AddForce (new Vector2 (255, 0));
+				hit.rigidbody.AddTorque (22f);
+			}
+		}
 	}
 
 }

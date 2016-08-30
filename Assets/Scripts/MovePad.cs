@@ -24,13 +24,15 @@ public class MovePad : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, ID
 	
 	// Update is called once per frame
 	void Update () {
-	
-	}
+        if (isPointerDown)
+        {
+            UpdatePlayer();
+        }
+    }
 
 	public void OnDrag (PointerEventData data)
 	{
 		UpdateButtonPosition (data);
-		UpdatePlayer ();
 	}
 
 	public void OnPointerUp (PointerEventData data)

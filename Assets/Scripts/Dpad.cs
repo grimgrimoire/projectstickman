@@ -49,7 +49,6 @@ public class Dpad : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDrag
 	{
 		if (gunShot != null && source != null)
 			source.PlayOneShot (gunShot);
-		player.ShootBullet (directionalPad.anchoredPosition3D);
 	}
 
 	public void OnDrag (PointerEventData data)

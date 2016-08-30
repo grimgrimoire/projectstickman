@@ -12,7 +12,6 @@ public class AimPad : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDr
 	public RectTransform joystickImage;
 	float globalXDefault;
 	float globalYDefault;
-	bool isPointerDown;
 
 	// Use this for initialization
 	void Start () {
@@ -30,18 +29,22 @@ public class AimPad : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDr
 	{
 		UpdateButtonPosition (data);
 		playerMove.UpdateAim (GetAngle());
+		if (joystickImage.anchoredPosition.x < 0)
+			playerMove.LookLeft ();
+		else if(joystickImage.anchoredPosition.x > 0)
+			playerMove.LookRight ();
 	}
 
 	public void OnPointerUp (PointerEventData data)
 	{
-		isPointerDown = false;
+		playerMove.RemoveTrigger ();
 		joystickImage.anchoredPosition = Vector2.zero;
 		playerMove.UpdateAim (0);
 	}
 
 	public void OnPointerDown (PointerEventData data)
 	{
-		isPointerDown = true;
+		playerMove.HoldTrigger ();
 		UpdateButtonPosition (data);
 	}
 
