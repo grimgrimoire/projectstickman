@@ -10,7 +10,7 @@ public class BaseEnemy : MonoBehaviour
     Rigidbody2D rigidBody;
     float distanceFromPlayer;
     public float moveSpeed = 6f;
-    public float engagementRange = 3f;
+    public float engagementRange = 1.5f;
     public bool isRanged;
 
     // Use this for initialization
@@ -19,6 +19,11 @@ public class BaseEnemy : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         rigidBody = GetComponent<Rigidbody2D>();
         iAttackPlayer = GetComponent<IAttackPlayer>();
+
+        if(player == null)
+        {
+            throw new Exception("Player tag not found!");
+        }
         if(iAttackPlayer == null)
         {
             throw new Exception("Base enemy is not attached to a legitimate enemy object");
@@ -31,6 +36,7 @@ public class BaseEnemy : MonoBehaviour
         UpdatePositions();
         LookAtPlayer();
         ChasePlayer();
+        AttackPlayer();
     }
 
     private void UpdatePositions()
@@ -53,6 +59,8 @@ public class BaseEnemy : MonoBehaviour
         {
             rigidBody.velocity = new Vector2(moveSpeed * transform.localScale.x, rigidBody.velocity.y);
         }
+        else
+            rigidBody.velocity = Vector2.zero;
     }
 
     private void AttackPlayer()

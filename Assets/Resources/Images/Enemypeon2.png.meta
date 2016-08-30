@@ -1,0 +1,157 @@
+fileFormatVersion: 2
+guid: a8f61e32faf420343a0bc399fcafe3cb
+timeCreated: 1472447782
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: helm
+    21300002: lowerarm
+    21300004: body
+    21300006: upperarm
+    21300008: lowerleg
+    21300010: upperleg
+    21300012: sword
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: helm
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 387
+        width: 162
+        height: 208
+      alignment: 9
+      pivot: {x: 0.25562775, y: 0.37057626}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: lowerarm
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 478
+        width: 130
+        height: 119
+      alignment: 9
+      pivot: {x: 0.11020742, y: 0.18063201}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: body
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 193
+        width: 116
+        height: 222
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: upperarm
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 356
+        width: 149
+        height: 62
+      alignment: 9
+      pivot: {x: 0.10677404, y: 0.4999995}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: lowerleg
+      rect:
+        serializedVersion: 2
+        x: 178
+        y: 147
+        width: 109
+        height: 150
+      alignment: 9
+      pivot: {x: 0.78835726, y: 0.8749654}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: upperleg
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 143
+        width: 66
+        height: 172
+      alignment: 9
+      pivot: {x: 0.49999952, y: 0.903947}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sword
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 459
+        height: 125
+      alignment: 9
+      pivot: {x: 0.17923938, y: 0.52646804}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
