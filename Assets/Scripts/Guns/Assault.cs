@@ -1,10 +1,19 @@
-﻿public class Assault : GunScript
+﻿using System;
+using System.Collections;
+using UnityEngine;
+
+public class Assault : GunScript
 {
-    float delay = 0;
+    
 
     public Assault()
     {
-
+        //param = new GunParameter();
+        //param.fireRateDelay = delay;
+        //param.accuracy = accuracy;
+        //param.isAutomatic = isAutomatic;
+        //param.bulletPerShot = 1;
+        //param.damageFalloff = 0;
     }
 
     // Use this for initialization
@@ -13,13 +22,9 @@
 
     }
 
-    public override void ShootBullet(GunParameter gparam)
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {
     }
+
 }

@@ -1,7 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
-public class RedKnight : MonoBehaviour, IAttackPlayer
+public class RedKnight : MonoBehaviour, IBaseEnemy
 {
 
     Animator animator;
@@ -10,28 +11,56 @@ public class RedKnight : MonoBehaviour, IAttackPlayer
     // Use this for initialization
     void Start()
     {
-        animator = GetComponent<Animator>();
-
+        animator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     public void Attack()
     {
-        if(!isAttacking)
+        if (!isAttacking)
             StartCoroutine(ActionAttack());
     }
 
     IEnumerator ActionAttack()
     {
         isAttacking = true;
-        animator.Play("AttackEnemy");
-        yield return new WaitForSeconds(0.5f);
+        animator.Play("AttackEnemy", 1);
+        yield return new WaitForSeconds(1f);
+        animator.Play("Idle", 1);
         isAttacking = false;
-        animator.Play("");
+    }
+
+    public float AttackRange()
+    {
+        return 2.5f;
+    }
+
+    public bool CanMove()
+    {
+        //return !isAttacking;
+        //return false;
+        return true;
+    }
+
+    public float WalkingSpeed()
+    {
+        return 4f;
+    }
+
+    public void WalkAnimation()
+    {
+        if (!isAttacking)
+            animator.Play("WalkEnemy2");
+    }
+
+    public void StopWalking()
+    {
+        //if (!isAttacking)
+        //    animator.Play("Idle", 0);
     }
 }

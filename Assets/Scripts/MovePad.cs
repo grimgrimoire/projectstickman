@@ -71,7 +71,16 @@ public class MovePad : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, ID
 		} else if (joystickImage.anchoredPosition.x > 0) {
 			playerMove.MoveRight (joystickImage.anchoredPosition.x / 80);
 		} 
-//		anim.startanimation (directionalPad.anchoredPosition.x);
-	}
+        
+        if(joystickImage.anchoredPosition.y > 50)
+        {
+            playerMove.Jump();
+        }
+
+        if (joystickImage.anchoredPosition.y < 50)
+        {
+            playerMove.Duck();
+        }
+    }
 
 }

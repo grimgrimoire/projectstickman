@@ -7,7 +7,6 @@ public class PlayerMovement : MonoBehaviour
 	public Light weaponLight;
 	public GameObject playerAimingArm;
 	public StartAnimasi anim;
-	public GunScript gun;
 
 	float defaultAim = 300;
 	float moveSpeed = 5f;
@@ -33,7 +32,6 @@ public class PlayerMovement : MonoBehaviour
 	{
 		do {
 			ShootBullet ();
-			gun.ShootBullet(new GunParameter());
 			yield return new WaitForSeconds (0.3f);
 		} while(true);
 	}
@@ -99,6 +97,11 @@ public class PlayerMovement : MonoBehaviour
 		}
 	}
 
+    public void Duck()
+    {
+
+    }
+
 	public void Stop ()
 	{
 		rigid.velocity = new Vector2 (0, rigid.velocity.y);
@@ -114,10 +117,6 @@ public class PlayerMovement : MonoBehaviour
 			Debug.Log (hit.collider.gameObject.tag);
 			Debug.DrawLine (weaponTarget.transform.position, hit.point, Color.yellow, 0.5f);
 			StartCoroutine (ShowGunFire ());
-			if (hit.collider.gameObject.tag == "xxx") {
-				hit.rigidbody.AddForce (new Vector2 (255, 0));
-				hit.rigidbody.AddTorque (22f);
-			}
 		}
 	}
 

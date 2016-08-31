@@ -1,7 +1,13 @@
 ﻿using System;
 
-public interface IShootBullet<T>
+public interface IShootBullet
 {
-	void ShootBullet(T gunParameter);
+	void HoldTrigger();
+    void RemoveTrigger();
+}
+
+public interface IShootProjectile
+{
+    void ShootProjectile();
 }
 

@@ -19,6 +19,7 @@ public class StartAnimasi : MonoBehaviour {
 		}else if (x < 0) {
 			speeding = 1;
 		}
+        
 
 	}
 

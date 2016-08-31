@@ -3,14 +3,12 @@ using System;
 
 public class BaseEnemy : MonoBehaviour
 {
-    IAttackPlayer iAttackPlayer;
+    IBaseEnemy iBaseEnemy;
 
     GameObject player;
     Vector3 playerPosition;
     Rigidbody2D rigidBody;
     float distanceFromPlayer;
-    public float moveSpeed = 6f;
-    public float engagementRange = 1.5f;
     public bool isRanged;
 
     // Use this for initialization
@@ -18,13 +16,12 @@ public class BaseEnemy : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         rigidBody = GetComponent<Rigidbody2D>();
-        iAttackPlayer = GetComponent<IAttackPlayer>();
-
-        if(player == null)
+        iBaseEnemy = GetComponent<IBaseEnemy>();
+        if (player == null)
         {
             throw new Exception("Player tag not found!");
         }
-        if(iAttackPlayer == null)
+        if (iBaseEnemy == null)
         {
             throw new Exception("Base enemy is not attached to a legitimate enemy object");
         }
@@ -47,27 +44,36 @@ public class BaseEnemy : MonoBehaviour
 
     private void LookAtPlayer()
     {
-        if (playerPosition.x < transform.position.x)
-            transform.localScale = new Vector3(-1, 1, 1);
-        else
-            transform.localScale = new Vector3(1, 1, 1);
+        if (iBaseEnemy.CanMove())
+            if (playerPosition.x < transform.position.x)
+                transform.localScale = new Vector3(-1, 1, 1);
+            else
+                transform.localScale = new Vector3(1, 1, 1);
     }
 
     private void ChasePlayer()
     {
-        if (distanceFromPlayer >= engagementRange)
+        if (iBaseEnemy.CanMove())
         {
-            rigidBody.velocity = new Vector2(moveSpeed * transform.localScale.x, rigidBody.velocity.y);
+            if (distanceFromPlayer >= iBaseEnemy.AttackRange())
+            {
+                rigidBody.velocity = new Vector2(iBaseEnemy.WalkingSpeed() * transform.localScale.x, rigidBody.velocity.y);
+                iBaseEnemy.WalkAnimation();
+            }
         }
         else
+        {
             rigidBody.velocity = Vector2.zero;
+            iBaseEnemy.StopWalking();
+        }
+
     }
 
     private void AttackPlayer()
     {
-        if(distanceFromPlayer < engagementRange)
+        if (distanceFromPlayer <= iBaseEnemy.AttackRange())
         {
-            iAttackPlayer.Attack();
+            iBaseEnemy.Attack();
         }
     }
 
