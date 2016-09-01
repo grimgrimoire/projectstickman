@@ -16,7 +16,7 @@ public class RedArcher : MonoBehaviour, IBaseEnemy
     {
         animator = GetComponentInChildren<Animator>();
         baseEnemy = GetComponent<BaseEnemy>();
-        animator.Play("Aiming", 2);
+        animator.Play("Aiming", 1);
     }
 
     // Update is called once per frame
