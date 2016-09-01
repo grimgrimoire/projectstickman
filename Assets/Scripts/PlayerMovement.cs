@@ -1,123 +1,134 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-	public GameObject weaponTarget;
-	public Light weaponLight;
-	public GameObject playerAimingArm;
-	public StartAnimasi anim;
+    public GameObject weaponTarget;
+    public Light weaponLight;
+    public GameObject playerAimingArm;
+    public StartAnimasi anim;
 
-	float defaultAim = 300;
-	float moveSpeed = 5f;
-	float jumpHeight = 8f;
-	Rigidbody2D rigid;
-	bool right;
-	bool left;
-	IEnumerator shootingCoroutine;
+    float defaultAim = 300;
+    float moveSpeed = 5f;
+    float jumpHeight = 8f;
+    bool isGrounded;
+    Rigidbody2D rigid;
+    bool right;
+    bool left;
+    IEnumerator shootingCoroutine;
 
-	// Use this for initialization
-	void Start ()
-	{	
-		rigid = GetComponent<Rigidbody2D> ();
-		shootingCoroutine = AutomaticShooting ();
-	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
-	}
+    // Use this for initialization
+    void Start()
+    {
+        rigid = GetComponent<Rigidbody2D>();
+        shootingCoroutine = AutomaticShooting();
+    }
 
-	IEnumerator AutomaticShooting ()
-	{
-		do {
-			ShootBullet ();
-			yield return new WaitForSeconds (0.3f);
-		} while(true);
-	}
+    // Update is called once per frame
+    void Update()
+    {
+        RaycastHit2D ray = Physics2D.Raycast(transform.position, Vector2.down, 1.1f, 512);
+        isGrounded = ray;
+        if (ray)
+        {
+            Debug.DrawLine(transform.position, ray.point, Color.red, 0.1f);
+        }
+    }
 
-	IEnumerator ShowGunFire ()
-	{
-		if (weaponLight != null) {
-			if (weaponLight.intensity == 0)
-				weaponLight.intensity = 10f;
-			yield return new WaitForSeconds (0.05f);
-			weaponLight.intensity = 0;
-		}
-	}
+    IEnumerator AutomaticShooting()
+    {
+        do
+        {
+            ShootBullet();
+            yield return new WaitForSeconds(0.3f);
+        } while (true);
+    }
 
-	public void HoldTrigger ()
-	{
-		StartCoroutine (shootingCoroutine);
-	}
+    IEnumerator ShowGunFire()
+    {
+        if (weaponLight != null)
+        {
+            if (weaponLight.intensity == 0)
+                weaponLight.intensity = 10f;
+            yield return new WaitForSeconds(0.05f);
+            weaponLight.intensity = 0;
+        }
+    }
 
-	public void RemoveTrigger ()
-	{
-		StopCoroutine (shootingCoroutine);
-	}
+    public void HoldTrigger()
+    {
+        StartCoroutine(shootingCoroutine);
+    }
 
-	public void UpdateAim (float angle)
-	{
-		playerAimingArm.transform.localEulerAngles = new Vector3 (0, 0, 300 + angle);
-	}
+    public void RemoveTrigger()
+    {
+        StopCoroutine(shootingCoroutine);
+    }
 
-	public void MoveRight (float multiplier)
-	{
-		CheckCollision ();
-		rigid.velocity = new Vector2 (moveSpeed, rigid.velocity.y);
-		anim.startanimation (1);
-	}
+    public void UpdateAim(float angle)
+    {
+        playerAimingArm.transform.localEulerAngles = new Vector3(0, 0, 300 + angle);
+    }
 
-	private void CheckCollision ()
-	{
-		
-	}
+    public void MoveRight(float multiplier)
+    {
+        CheckCollision();
+        rigid.velocity = new Vector2(moveSpeed, rigid.velocity.y);
+        anim.startanimation(1);
+    }
 
-	public void MoveLeft (float multiplier)
-	{
-		CheckCollision ();
-		rigid.velocity = new Vector2 (-moveSpeed, rigid.velocity.y);
-		anim.startanimation (1);
-	}
+    private void CheckCollision()
+    {
 
-	public void LookRight ()
-	{
-		transform.localScale = new Vector3 (1, 1, 1);
-	}
+    }
 
-	public void LookLeft ()
-	{
-		transform.localScale = new Vector3 (-1, 1, 1);
-	}
+    public void MoveLeft(float multiplier)
+    {
+        CheckCollision();
+        rigid.velocity = new Vector2(-moveSpeed, rigid.velocity.y);
+        anim.startanimation(1);
+    }
 
-	public void Jump ()
-	{
-		if (rigid.velocity.y == 0) {
-			rigid.velocity = new Vector2 (rigid.velocity.x, jumpHeight);
-		}
-	}
+    public void LookRight()
+    {
+        transform.localScale = new Vector3(1, 1, 1);
+    }
+
+    public void LookLeft()
+    {
+        transform.localScale = new Vector3(-1, 1, 1);
+    }
+
+    public void Jump()
+    {
+        if (isGrounded)
+        {
+            rigid.velocity = new Vector2(rigid.velocity.x, jumpHeight);
+        }
+    }
 
     public void Duck()
     {
 
     }
 
-	public void Stop ()
-	{
-		rigid.velocity = new Vector2 (0, rigid.velocity.y);
-		anim.stopanimation (Vector2.zero);
-	}
+    public void Stop()
+    {
+        rigid.velocity = new Vector2(0, rigid.velocity.y);
+        anim.stopanimation(Vector2.zero);
+    }
 
-	private void ShootBullet ()
-	{
-		Vector2 target = weaponTarget.transform.right * transform.localScale.x;
-		target += (Random.insideUnitCircle) * 0.05f;
-		RaycastHit2D hit = Physics2D.Raycast (weaponTarget.transform.position, target, Mathf.Infinity);
-		if (hit) {
-			Debug.Log (hit.collider.gameObject.tag);
-			Debug.DrawLine (weaponTarget.transform.position, hit.point, Color.yellow, 0.5f);
-			StartCoroutine (ShowGunFire ());
-		}
-	}
+    private void ShootBullet()
+    {
+        Vector2 target = weaponTarget.transform.right * transform.localScale.x;
+        target += (Random.insideUnitCircle) * 0.05f;
+        RaycastHit2D hit = Physics2D.Raycast(weaponTarget.transform.position, target, Mathf.Infinity);
+        if (hit)
+        {
+            Debug.Log(hit.collider.gameObject.tag);
+            Debug.DrawLine(weaponTarget.transform.position, hit.point, Color.yellow, 0.5f);
+            StartCoroutine(ShowGunFire());
+        }
+    }
 
 }

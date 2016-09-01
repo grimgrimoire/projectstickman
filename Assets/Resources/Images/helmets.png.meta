@@ -1,0 +1,331 @@
+fileFormatVersion: 2
+guid: 966d67def976ae144b82d0794cf2f23b
+timeCreated: 1472547165
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: helmets_1
+    21300002: helmets_1
+    21300004: helmets_2
+    21300006: helmets_3
+    21300008: helmets_4
+    21300010: helmets_4
+    21300012: helmets_6
+    21300014: helmets_7
+    21300016: helmets_8
+    21300018: helmets_9
+    21300020: helmets_5
+    21300022: helmets_6
+    21300024: helmets_13
+    21300026: helmets_14
+    21300028: helmets_15
+    21300030: helmets_16
+    21300032: helmets_17
+    21300034: helmets_8
+    21300036: helmets_19
+    21300038: helmets_20
+    21300040: helmets_21
+    21300042: helmets_22
+    21300044: helmets_23
+    21300046: helmets_24
+    21300048: helmets_25
+    21300050: helmets_26
+    21300052: helmets_27
+    21300054: helmets_28
+    21300056: helmets_7
+    21300058: helmets_30
+    21300060: helmets_31
+    21300062: helmets_32
+    21300064: helmets_33
+    21300066: helmets_37
+    21300068: helmets_38
+    21300070: helmets_39
+    21300072: helmets_40
+    21300074: helmets_42
+    21300076: helmets_43
+    21300078: helmets_9
+    21300080: helmets_49
+    21300082: helmets_50
+    21300084: helmets_51
+    21300086: helmets_52
+    21300088: helmets_53
+    21300090: helmets_10
+    21300092: helmets_11
+    21300094: helmets_12
+    21300096: helmets_57
+    21300098: helmets_58
+    21300100: helmets_59
+    21300102: helmets_13
+    21300104: helmets_61
+    21300106: helmets_62
+    21300108: helmets_63
+    21300110: helmets_16
+    21300112: helmets_14
+    21300114: helmets_66
+    21300116: helmets_67
+    21300118: helmets_15
+    21300120: helmets_69
+    21300122: helmets_70
+    21300124: helmets_71
+    21300126: helmets_72
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: helmets_1
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 751
+        width: 128
+        height: 146
+      alignment: 9
+      pivot: {x: 0.34650198, y: 0.25776693}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: helmets_2
+      rect:
+        serializedVersion: 2
+        x: 259
+        y: 749
+        width: 143
+        height: 147
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: helmets_3
+      rect:
+        serializedVersion: 2
+        x: 511
+        y: 749
+        width: 149
+        height: 148
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: helmets_4
+      rect:
+        serializedVersion: 2
+        x: 772
+        y: 749
+        width: 146
+        height: 151
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: helmets_5
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 499
+        width: 115
+        height: 126
+      alignment: 9
+      pivot: {x: 0.22109623, y: 0.34327433}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: helmets_6
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 496
+        width: 94
+        height: 144
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: helmets_8
+      rect:
+        serializedVersion: 2
+        x: 777
+        y: 496
+        width: 132
+        height: 148
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: helmets_7
+      rect:
+        serializedVersion: 2
+        x: 536
+        y: 496
+        width: 114
+        height: 127
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: helmets_9
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 248
+        width: 112
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: helmets_10
+      rect:
+        serializedVersion: 2
+        x: 287
+        y: 249
+        width: 98
+        height: 120
+      alignment: 9
+      pivot: {x: 0.25671417, y: 0.14402594}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: helmets_11
+      rect:
+        serializedVersion: 2
+        x: 543
+        y: 249
+        width: 99
+        height: 121
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: helmets_12
+      rect:
+        serializedVersion: 2
+        x: 806
+        y: 249
+        width: 94
+        height: 129
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: helmets_13
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 0
+        width: 122
+        height: 144
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: helmets_16
+      rect:
+        serializedVersion: 2
+        x: 802
+        y: 1
+        width: 106
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: helmets_14
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 0
+        width: 108
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: helmets_15
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 1
+        width: 108
+        height: 122
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

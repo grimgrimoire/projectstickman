@@ -10,6 +10,7 @@ public class BaseEnemy : MonoBehaviour
     Rigidbody2D rigidBody;
     float distanceFromPlayer;
     public bool isRanged;
+    public float jumpHeight = 8f;
 
     // Use this for initialization
     void Start()
@@ -30,10 +31,27 @@ public class BaseEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        ShowDebug();
         UpdatePositions();
         LookAtPlayer();
         ChasePlayer();
         AttackPlayer();
+    }
+
+    public float GetDistanceFromPlayer()
+    {
+        return distanceFromPlayer;
+    }
+
+    public Vector3 GetPlayerPosition()
+    {
+        return playerPosition;
+    }
+
+    private void ShowDebug()
+    {
+        if (distanceFromPlayer < iBaseEnemy.AttackRange())
+            Debug.DrawLine(transform.position, playerPosition, Color.red, 0.1f);
     }
 
     private void UpdatePositions()
@@ -53,7 +71,7 @@ public class BaseEnemy : MonoBehaviour
 
     private void ChasePlayer()
     {
-        if (iBaseEnemy.CanMove())
+        if (iBaseEnemy.CanMove() && iBaseEnemy.WalkingSpeed() > 0)
         {
             if (distanceFromPlayer >= iBaseEnemy.AttackRange())
             {
@@ -63,9 +81,14 @@ public class BaseEnemy : MonoBehaviour
         }
         else
         {
-            rigidBody.velocity = Vector2.zero;
+            rigidBody.velocity = new Vector2(0, rigidBody.velocity.y);
             iBaseEnemy.StopWalking();
         }
+
+    }
+
+    private void Pathfinding()
+    {
 
     }
 

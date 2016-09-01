@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class RedKnight : MonoBehaviour, IBaseEnemy
 {
+    static string ATTACK = "AttackEnemy_M";
+    static string IDLE = "Idle";
 
     Animator animator;
     bool isAttacking = false;
@@ -17,7 +19,7 @@ public class RedKnight : MonoBehaviour, IBaseEnemy
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void Attack()
@@ -29,9 +31,9 @@ public class RedKnight : MonoBehaviour, IBaseEnemy
     IEnumerator ActionAttack()
     {
         isAttacking = true;
-        animator.Play("AttackEnemy", 1);
+        animator.Play(ATTACK, 1);
         yield return new WaitForSeconds(1f);
-        animator.Play("Idle", 1);
+        animator.Play(IDLE, 1);
         isAttacking = false;
     }
 
@@ -42,9 +44,7 @@ public class RedKnight : MonoBehaviour, IBaseEnemy
 
     public bool CanMove()
     {
-        //return !isAttacking;
-        //return false;
-        return true;
+        return !isAttacking;
     }
 
     public float WalkingSpeed()
@@ -55,12 +55,11 @@ public class RedKnight : MonoBehaviour, IBaseEnemy
     public void WalkAnimation()
     {
         if (!isAttacking)
-            animator.Play("WalkEnemy2");
+            animator.Play("WalkEnemy");
     }
 
     public void StopWalking()
     {
-        //if (!isAttacking)
-        //    animator.Play("Idle", 0);
+        animator.Play(IDLE, 0);
     }
 }
