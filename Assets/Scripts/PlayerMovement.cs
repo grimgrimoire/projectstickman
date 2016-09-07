@@ -4,24 +4,22 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public GameObject weaponTarget;
-    public Light weaponLight;
     public GameObject playerAimingArm;
     public StartAnimasi anim;
 
     float defaultAim = 300;
-    float moveSpeed = 5f;
-    float jumpHeight = 8f;
+    public float moveSpeed = 5f;
+    public float jumpHeight = 8f;
     bool isGrounded;
     Rigidbody2D rigid;
-    bool right;
-    bool left;
-    IEnumerator shootingCoroutine;
+    bool canMove;
+    GunScript gun;
 
     // Use this for initialization
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
-        shootingCoroutine = AutomaticShooting();
+        gun = GetComponentInChildren<GunScript>();
     }
 
     // Update is called once per frame
@@ -35,34 +33,14 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    IEnumerator AutomaticShooting()
-    {
-        do
-        {
-            ShootBullet();
-            yield return new WaitForSeconds(0.3f);
-        } while (true);
-    }
-
-    IEnumerator ShowGunFire()
-    {
-        if (weaponLight != null)
-        {
-            if (weaponLight.intensity == 0)
-                weaponLight.intensity = 10f;
-            yield return new WaitForSeconds(0.05f);
-            weaponLight.intensity = 0;
-        }
-    }
-
     public void HoldTrigger()
     {
-        StartCoroutine(shootingCoroutine);
+        gun.HoldTrigger();
     }
 
     public void RemoveTrigger()
     {
-        StopCoroutine(shootingCoroutine);
+        gun.RemoveTrigger();
     }
 
     public void UpdateAim(float angle)
@@ -72,21 +50,26 @@ public class PlayerMovement : MonoBehaviour
 
     public void MoveRight(float multiplier)
     {
-        CheckCollision();
-        rigid.velocity = new Vector2(moveSpeed, rigid.velocity.y);
-        anim.startanimation(1);
-    }
-
-    private void CheckCollision()
-    {
-
+        if (canMove)
+        {
+            rigid.velocity = new Vector2(moveSpeed, rigid.velocity.y);
+            if (isGrounded)
+                anim.startanimation(1);
+            else
+                anim.Jump();
+        }
     }
 
     public void MoveLeft(float multiplier)
     {
-        CheckCollision();
-        rigid.velocity = new Vector2(-moveSpeed, rigid.velocity.y);
-        anim.startanimation(1);
+        if (canMove)
+        {
+            rigid.velocity = new Vector2(-moveSpeed, rigid.velocity.y);
+            if (isGrounded)
+                anim.startanimation(1);
+            else
+                anim.Jump();
+        }
     }
 
     public void LookRight()
@@ -99,36 +82,34 @@ public class PlayerMovement : MonoBehaviour
         transform.localScale = new Vector3(-1, 1, 1);
     }
 
+    public void Standing()
+    {
+        canMove = true;
+    }
+
     public void Jump()
     {
         if (isGrounded)
         {
             rigid.velocity = new Vector2(rigid.velocity.x, jumpHeight);
+            anim.Jump();
         }
     }
 
     public void Duck()
     {
-
+        if (isGrounded)
+        {
+            canMove = false;
+            rigid.velocity = new Vector2(0, -4);
+            anim.Duck();
+        }
     }
 
     public void Stop()
     {
         rigid.velocity = new Vector2(0, rigid.velocity.y);
         anim.stopanimation(Vector2.zero);
-    }
-
-    private void ShootBullet()
-    {
-        Vector2 target = weaponTarget.transform.right * transform.localScale.x;
-        target += (Random.insideUnitCircle) * 0.05f;
-        RaycastHit2D hit = Physics2D.Raycast(weaponTarget.transform.position, target, Mathf.Infinity);
-        if (hit)
-        {
-            Debug.Log(hit.collider.gameObject.tag);
-            Debug.DrawLine(weaponTarget.transform.position, hit.point, Color.yellow, 0.5f);
-            StartCoroutine(ShowGunFire());
-        }
     }
 
 }

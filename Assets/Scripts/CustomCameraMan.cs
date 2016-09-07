@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Camera : MonoBehaviour {
+public class CustomCameraMan : MonoBehaviour {
 
 	public GameObject player;
 
@@ -12,7 +12,7 @@ public class Camera : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		transform.position = new Vector3(player.transform.position.x, player.transform.position.y, -10);
+		transform.position = new Vector3(player.transform.position.x, 0, -10);
 	}
 
 	void Awake(){

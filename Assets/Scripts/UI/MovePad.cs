@@ -66,20 +66,26 @@ public class MovePad : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, ID
 
 	private void UpdatePlayer ()
 	{
-		if (joystickImage.anchoredPosition.x < 0){
+		if (joystickImage.anchoredPosition.x < -20){
 			playerMove.MoveLeft (-joystickImage.anchoredPosition.x / 80);
-		} else if (joystickImage.anchoredPosition.x > 0) {
+		} else if (joystickImage.anchoredPosition.x > 20) {
 			playerMove.MoveRight (joystickImage.anchoredPosition.x / 80);
-		} 
+		}
+        else
+        {
+            playerMove.Stop();
+        }
         
         if(joystickImage.anchoredPosition.y > 65)
         {
             playerMove.Jump();
-        }
-
-        if (joystickImage.anchoredPosition.y < 65)
+        } else if (joystickImage.anchoredPosition.y < -65)
         {
             playerMove.Duck();
+        }
+        else
+        {
+            playerMove.Standing();
         }
     }
 

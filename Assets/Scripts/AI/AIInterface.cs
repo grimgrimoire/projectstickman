@@ -3,10 +3,10 @@
 public interface IBaseEnemy
 {
     bool CanMove();
-    float WalkingSpeed();
     void WalkAnimation();
     void StopWalking();
     void Attack();
+    void Dead();
     float AttackRange();
 }
 

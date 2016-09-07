@@ -4,8 +4,13 @@ using System;
 
 public class RedArcher : MonoBehaviour, IBaseEnemy
 {
-    static string ATTACK = "AttackEnemy_R";
+    static string ATTACK = "Aiming";
     static string IDLE = "Idle";
+    static string BLEND = "Blend";
+    public float attackRange = 15f;
+    public float aimingDelay = 0.5f;
+    public float attackDelay = 2f;
+    public GameObject arrowPrefab;
 
     bool isAttacking;
     Animator animator;
@@ -16,7 +21,7 @@ public class RedArcher : MonoBehaviour, IBaseEnemy
     {
         animator = GetComponentInChildren<Animator>();
         baseEnemy = GetComponent<BaseEnemy>();
-        animator.Play("Aiming", 1);
+        animator.Play(ATTACK, 1);
     }
 
     // Update is called once per frame
@@ -34,10 +39,43 @@ public class RedArcher : MonoBehaviour, IBaseEnemy
     IEnumerator ActionAttack()
     {
         isAttacking = true;
-        animator.SetFloat("Blend", GetAngle() / 180);
-        //yield return new WaitForSeconds(0.16f);
-        yield return null;
+        animator.SetFloat(BLEND, GetAngle() / 180);
+        yield return new WaitForSeconds(aimingDelay);
+        ShootArrowAtPlayer();
+        //DrawArrowTrajectory();
+        yield return new WaitForSeconds(aimingDelay);
+        animator.SetFloat(BLEND, 0);
+        yield return new WaitForSeconds(attackDelay);
         isAttacking = false;
+    }
+
+    private void ShootArrowAtPlayer()
+    {
+        GameObject arrow = GameObject.Instantiate(arrowPrefab);
+        arrow.transform.position = transform.position;
+        arrow.GetComponent<Projectile>().SetTargetPosition(baseEnemy.GetPlayerPosition());
+    }
+
+    private void DrawArrowTrajectory()
+    {
+        StartCoroutine(Drawpath());
+    }
+
+    IEnumerator Drawpath()
+    {
+        Vector2 tempStart1 = transform.position;
+        Vector2 tempStart2 = transform.position;
+        Vector2 tempTarget = baseEnemy.GetPlayerPosition();
+        float hMovement = Mathf.Clamp(tempTarget.x - tempStart2.x, -10, 10);
+        float compensation = Mathf.Abs((tempTarget.x - tempStart2.x))/Mathf.Abs(hMovement);
+        float vMovement = compensation/2 * 10 + (tempTarget.y - tempStart2.y)/compensation;
+        while (Vector2.Distance(tempStart1, tempTarget) >= 0.5f) {
+            tempStart2 = new Vector2( tempStart2.x + (hMovement * Time.deltaTime), tempStart2.y + (vMovement * Time.deltaTime));
+            vMovement -= (Time.deltaTime * 10);
+            Debug.DrawLine(tempStart1, tempStart2, Color.red, 1f);
+            tempStart1 = tempStart2;
+            yield return new WaitForEndOfFrame();
+        }
     }
 
     private float GetAngle()
@@ -50,7 +88,7 @@ public class RedArcher : MonoBehaviour, IBaseEnemy
 
     public float AttackRange()
     {
-        return 10f;
+        return attackRange;
     }
 
     public bool CanMove()
@@ -58,18 +96,20 @@ public class RedArcher : MonoBehaviour, IBaseEnemy
         return !isAttacking;
     }
 
-    public void StopWalking()
-    {
-        
-    }
-
     public void WalkAnimation()
     {
-        
+        if (!isAttacking)
+            animator.Play("WalkEnemy");
     }
 
-    public float WalkingSpeed()
+    public void StopWalking()
     {
-        return 0;
+        animator.Play(IDLE, 0);
+    }
+
+    public void Dead()
+    {
+        animator.Play("EnemyDead");
+        StopAllCoroutines();
     }
 }

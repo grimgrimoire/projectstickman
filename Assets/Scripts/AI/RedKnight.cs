@@ -47,11 +47,6 @@ public class RedKnight : MonoBehaviour, IBaseEnemy
         return !isAttacking;
     }
 
-    public float WalkingSpeed()
-    {
-        return 4f;
-    }
-
     public void WalkAnimation()
     {
         if (!isAttacking)
@@ -61,5 +56,10 @@ public class RedKnight : MonoBehaviour, IBaseEnemy
     public void StopWalking()
     {
         animator.Play(IDLE, 0);
+    }
+
+    public void Dead()
+    {
+        animator.Play("EnemyDead");
     }
 }
