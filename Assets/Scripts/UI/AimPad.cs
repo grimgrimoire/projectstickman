@@ -39,7 +39,7 @@ public class AimPad : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDr
 	{
 		playerMove.RemoveTrigger ();
 		joystickImage.anchoredPosition = Vector2.zero;
-		playerMove.UpdateAim (0);
+		playerMove.UpdateAim (90);
 	}
 
 	public void OnPointerDown (PointerEventData data)
