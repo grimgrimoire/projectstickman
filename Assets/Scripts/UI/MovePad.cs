@@ -40,9 +40,6 @@ public class MovePad : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, ID
 		isPointerDown = false;
 		joystickImage.anchoredPosition = Vector2.zero;
 		playerMove.Stop ();
-//		player.UpdateAim (0);
-//		player.Stop ();
-//		anim.stopanimation (directionalPad.anchoredPosition);
 	}
 
 	public void OnPointerDown (PointerEventData data)
@@ -71,10 +68,6 @@ public class MovePad : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, ID
 		} else if (joystickImage.anchoredPosition.x > 20) {
 			playerMove.MoveRight (joystickImage.anchoredPosition.x / 80);
 		}
-        else
-        {
-            playerMove.Stop();
-        }
         
         if(joystickImage.anchoredPosition.y > 65)
         {

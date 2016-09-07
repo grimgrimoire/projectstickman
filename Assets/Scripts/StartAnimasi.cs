@@ -14,6 +14,11 @@ public class StartAnimasi : MonoBehaviour
         anim.Play("Walk");
     }
 
+    public void SetFloat(string name, float value)
+    {
+        anim.SetFloat(name, value);
+    }
+
     public void stopanimation(Vector2 stop)
     {
         if (stop == Vector2.zero)

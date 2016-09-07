@@ -45,7 +45,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void UpdateAim(float angle)
     {
-        playerAimingArm.transform.localEulerAngles = new Vector3(0, 0, 300 + angle);
+        //playerAimingArm.transform.localEulerAngles = new Vector3(0, 0, 300 + angle);
+        anim.SetFloat("Aim", angle / 180);
     }
 
     public void MoveRight(float multiplier)

@@ -63,12 +63,12 @@ public class AimPad : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDr
 
 	private float GetAngle ()
 	{
-		float angle = Vector2.Angle (Vector2.right, joystickImage.anchoredPosition);
-		if (angle > 90) {
-			angle = 180 - angle;
-		}
-		if (joystickImage.anchoredPosition.y < 0)
-			angle = -angle;
+		float angle = Vector2.Angle (Vector2.down, joystickImage.anchoredPosition);
+		//if (angle > 90) {
+		//	angle = 180 - angle;
+		//}
+		//if (joystickImage.anchoredPosition.y < 0)
+		//	angle = -angle;
 		return angle;
 	}
 
