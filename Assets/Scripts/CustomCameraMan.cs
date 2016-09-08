@@ -4,6 +4,8 @@ using System.Collections;
 public class CustomCameraMan : MonoBehaviour {
 
 	public GameObject player;
+    public float rightLimit;
+    public float leftLimit;
 
 	// Use this for initialization
 	void Start () {
@@ -12,7 +14,8 @@ public class CustomCameraMan : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		transform.position = new Vector3(player.transform.position.x, 0, -10);
+        if(player.transform.position.x >= leftLimit && player.transform.position.x <= rightLimit)
+		    transform.position = new Vector3(player.transform.position.x, 0, -10);
 	}
 
 	void Awake(){

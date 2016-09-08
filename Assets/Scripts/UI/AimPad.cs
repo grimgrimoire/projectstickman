@@ -44,9 +44,10 @@ public class AimPad : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDr
 
 	public void OnPointerDown (PointerEventData data)
 	{
-		playerMove.HoldTrigger ();
-		UpdateButtonPosition (data);
-	}
+        UpdateButtonPosition(data);
+        playerMove.UpdateAim(GetAngle());
+        playerMove.HoldTrigger ();
+    }
 
 
 	private void UpdateButtonPosition (PointerEventData data)

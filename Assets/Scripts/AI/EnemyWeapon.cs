@@ -3,6 +3,8 @@ using System.Collections;
 
 public class EnemyWeapon : MonoBehaviour {
 
+    public int damage;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -17,10 +19,8 @@ public class EnemyWeapon : MonoBehaviour {
     {
         if (collider.gameObject.tag == "Player")
         {
-            
+            GameObject.Find("UI").GetComponent<PlayerUI>().PlayerTakeDamage(damage);
         }
-
-        Debug.Log(collider.gameObject.tag);
     }
 
 }

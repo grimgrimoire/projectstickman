@@ -9,11 +9,15 @@ public class Projectile : MonoBehaviour
     public float height = 10;
     private Vector2 target;
     private Vector2 initialPosition;
+    private BoxCollider2D hitBox;
 
     IEnumerator arrowMovement;
     // Use this for initialization
     void Start()
     {
+        hitBox = GetComponent<BoxCollider2D>();
+        if (!isPersistOnHit)
+            StartCoroutine(BulletMovement());
     }
 
     // Update is called once per frame
@@ -28,9 +32,9 @@ public class Projectile : MonoBehaviour
         {
             arrowMovement = ArrowMovement();
             StartCoroutine(arrowMovement);
-        }else
+        }
+        else
         {
-            StartCoroutine(BulletMovement());
         }
     }
 
@@ -59,14 +63,11 @@ public class Projectile : MonoBehaviour
 
     IEnumerator BulletMovement()
     {
-        float delay = 0.5f;
-        while (delay > 0)
+        while (true)
         {
+            yield return new WaitForEndOfFrame();
             transform.position = Vector2.MoveTowards(new Vector2(transform.position.x, transform.position.y), target, 100 * Time.deltaTime);
-            delay -= Time.deltaTime;
-            yield return new WaitForFixedUpdate();
         }
-        Destroy(this.gameObject);
     }
 
     void OnTriggerEnter2D(Collider2D collider)
@@ -83,6 +84,7 @@ public class Projectile : MonoBehaviour
 
     IEnumerator DestroySelf(float dur)
     {
+        hitBox.enabled = false;
         yield return new WaitForSeconds(dur);
         Destroy(this.gameObject);
     }

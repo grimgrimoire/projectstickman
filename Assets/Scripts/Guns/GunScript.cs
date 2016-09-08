@@ -17,7 +17,7 @@ public class GunScript : MonoBehaviour, IShootBullet
     bool isTriggerHeld;
     IEnumerator gunFire;
     Transform player;
-
+    GameObject bullet;
     int targetMask;
 
     public GunScript()
@@ -28,6 +28,7 @@ public class GunScript : MonoBehaviour, IShootBullet
 
     void Start()
     {
+        bullet = GameObject.Instantiate(bulletPrefab);
     }
 
     void Update()
@@ -50,7 +51,6 @@ public class GunScript : MonoBehaviour, IShootBullet
             RaycastHit2D hit = Physics2D.Raycast(weaponTarget.transform.position, target, Mathf.Infinity, targetMask);
             if (hit)
             {
-                GameObject bullet = GameObject.Instantiate(bulletPrefab);
                 bullet.transform.position = weaponTarget.position;
                 bullet.GetComponent<Projectile>().SetTargetPosition(hit.point);
                 if (hit.collider.gameObject.tag.Equals(ConstMask.TAG_ENEMY))
