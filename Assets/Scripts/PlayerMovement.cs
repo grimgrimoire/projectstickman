@@ -5,9 +5,8 @@ public class PlayerMovement : MonoBehaviour
 {
     public GameObject weaponTarget;
     public GameObject playerAimingArm;
-    public StartAnimasi anim;
+    public PlayerAnimation playerAnimation;
 
-    float defaultAim = 300;
     public float moveSpeed = 5f;
     public float jumpHeight = 8f;
     bool isGrounded;
@@ -20,6 +19,10 @@ public class PlayerMovement : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody2D>();
         gun = GetComponentInChildren<GunScript>();
+        if(playerAnimation == null)
+        {
+            playerAnimation = GetComponentInChildren<PlayerAnimation>();
+        }
     }
 
     // Update is called once per frame
@@ -31,6 +34,11 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.DrawLine(transform.position, ray.point, Color.red, 0.1f);
         }
+    }
+
+    public void updateWeaponHold(bool isTwoHanded)
+    {
+        playerAnimation.SetHoldingAnimation(isTwoHanded);
     }
 
     public void HoldTrigger()
@@ -46,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
     public void UpdateAim(float angle)
     {
         //playerAimingArm.transform.localEulerAngles = new Vector3(0, 0, 300 + angle);
-        anim.SetFloat("Aim", angle / 180);
+        playerAnimation.SetFloat("Aim", angle / 180);
     }
 
     public void MoveRight(float multiplier)
@@ -55,9 +63,9 @@ public class PlayerMovement : MonoBehaviour
         {
             rigid.velocity = new Vector2(moveSpeed, rigid.velocity.y);
             if (isGrounded)
-                anim.startanimation(1);
+                playerAnimation.StartWalking();
             else
-                anim.Jump();
+                playerAnimation.Jump();
         }
     }
 
@@ -67,9 +75,9 @@ public class PlayerMovement : MonoBehaviour
         {
             rigid.velocity = new Vector2(-moveSpeed, rigid.velocity.y);
             if (isGrounded)
-                anim.startanimation(1);
+                playerAnimation.StartWalking();
             else
-                anim.Jump();
+                playerAnimation.Jump();
         }
     }
 
@@ -93,7 +101,7 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded)
         {
             rigid.velocity = new Vector2(rigid.velocity.x, jumpHeight);
-            anim.Jump();
+            playerAnimation.Jump();
         }
     }
 
@@ -103,14 +111,14 @@ public class PlayerMovement : MonoBehaviour
         {
             canMove = false;
             rigid.velocity = new Vector2(0, -4);
-            anim.Duck();
+            playerAnimation.Duck();
         }
     }
 
     public void Stop()
     {
         rigid.velocity = new Vector2(0, rigid.velocity.y);
-        anim.stopanimation(Vector2.zero);
+        playerAnimation.StopMovement(Vector2.zero);
     }
 
 }

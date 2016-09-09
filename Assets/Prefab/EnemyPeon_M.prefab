@@ -581,7 +581,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 7
   jumpHeight: 8
-  health: 30
+  health: 20
   healthBarParent: {fileID: 1000011342519894}
 --- !u!114 &114000011337197680
 MonoBehaviour:
@@ -621,7 +621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a41a61c249138de41b637f52f9d06d36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 25
+  damage: 15
 --- !u!114 &114000013647132590
 MonoBehaviour:
   m_ObjectHideFlags: 1

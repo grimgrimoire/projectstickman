@@ -1,17 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class StartAnimasi : MonoBehaviour
+public class PlayerAnimation : MonoBehaviour
 {
 
     Animator anim;
     //int walkHash = Animator.StringToHash("Walk");
     //int Stop = Animator.StringToHash("Stop");
-    int speeding;
 
-    public void startanimation(float x)
+    public void StartWalking()
     {
         anim.Play("Walk");
+    }
+
+    public void SetHoldingAnimation(bool isTwoHanded)
+    {
+        anim.SetBool("IsTwoHanded", isTwoHanded);
     }
 
     public void SetFloat(string name, float value)
@@ -19,7 +23,7 @@ public class StartAnimasi : MonoBehaviour
         anim.SetFloat(name, value);
     }
 
-    public void stopanimation(Vector2 stop)
+    public void StopMovement(Vector2 stop)
     {
         if (stop == Vector2.zero)
         {

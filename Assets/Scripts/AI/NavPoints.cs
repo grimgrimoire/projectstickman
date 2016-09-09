@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
-
 class NavPoints
 {
     public enum NavType {none, platform, edgeLeft, edgeRight, solo}

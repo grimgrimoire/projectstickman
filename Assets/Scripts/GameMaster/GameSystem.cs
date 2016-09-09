@@ -10,8 +10,7 @@ public class GameSystem : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        enemySpawnerList = new List<EnemySpawn>();
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -25,6 +24,28 @@ public class GameSystem : MonoBehaviour {
 
     public void AddEnemySpawnLocation(EnemySpawn spawner)
     {
+        if(enemySpawnerList == null)
+        {
+            enemySpawnerList = new List<EnemySpawn>();
+        }
         enemySpawnerList.Add(spawner);
+    }
+
+    public void GameOver()
+    {
+
+    }
+
+    public void RestartGame()
+    {
+
+    }
+
+    public void StartSpawnEnemy()
+    {
+        foreach(EnemySpawn spawn in enemySpawnerList)
+        {
+            spawn.StartSpawnEnemy();
+        }
     }
 }

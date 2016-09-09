@@ -8,7 +8,6 @@ public class Projectile : MonoBehaviour
     public float speed = 10;
     public float height = 10;
     private Vector2 target;
-    private Vector2 initialPosition;
     private BoxCollider2D hitBox;
 
     IEnumerator arrowMovement;
@@ -40,7 +39,6 @@ public class Projectile : MonoBehaviour
 
     IEnumerator ArrowMovement()
     {
-        initialPosition = transform.position;
         Vector3 tempStart1 = transform.position;
         float hMovement = Mathf.Clamp(target.x - transform.position.x, -speed, speed);
         float compensation = Mathf.Abs((target.x - transform.position.x)) / Mathf.Abs(hMovement);

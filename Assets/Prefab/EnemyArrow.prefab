@@ -88,7 +88,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPersistOnHit: 1
   speed: 8
-  height: 0
+  height: 5
 --- !u!114 &114000013244729064
 MonoBehaviour:
   m_ObjectHideFlags: 1

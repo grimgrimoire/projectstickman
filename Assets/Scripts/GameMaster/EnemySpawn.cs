@@ -44,9 +44,9 @@ public class EnemySpawn : MonoBehaviour
         while (spawnNumber[index] > 0)
         {
             yield return new WaitForSeconds(spawnDelay[index]);
-            spawnNumber[index]--;
             GameObject instance = Instantiate(enemyListPrefab[index]);
             instance.transform.position = transform.position;
+            spawnNumber[index]--;
         }
     }
 }

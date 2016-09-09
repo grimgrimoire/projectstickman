@@ -8,7 +8,7 @@ public class PlayerUI : MonoBehaviour {
     public RectTransform bossHealthBar;
     public Text playerLive;
     public Text waveNumber;
-    public Text stageName;
+    public Text mainLabel;
     public GameObject curtain;
 
     public int waveNumberInt;
@@ -19,18 +19,21 @@ public class PlayerUI : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        StartCoroutine(StartGameSquence());
         gameSystem = GameObject.Find("GameSystem").GetComponent<GameSystem>();
         if(gameSystem == null)
         {
             throw new System.Exception("Fatal error: Game system is not found!!");
         }
-	}
+        StartCoroutine(StartGameSquence());
+    }
 
     IEnumerator StartGameSquence()
     {
-        yield return new WaitForSeconds(3f);
+        mainLabel.text = gameSystem.GetStageName() + "\nStart";
+        yield return new WaitForSeconds(1f);
         curtain.SetActive(false);
+        mainLabel.enabled = false;
+        gameSystem.StartSpawnEnemy();
     }
 	
 	// Update is called once per frame

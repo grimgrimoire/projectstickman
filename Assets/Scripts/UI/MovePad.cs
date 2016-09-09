@@ -20,13 +20,44 @@ public class MovePad : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, ID
 		globalXDefault = joystickImage.position.x;
 		globalYDefault = joystickImage.position.y;
 		playerMove = player.GetComponent<PlayerMovement>();
-	}
+        if (player == null)
+        {
+            GameObject.FindGameObjectWithTag(ConstMask.TAG_PLAYER);
+        }
+    }
 	
 	// Update is called once per frame
 	void Update () {
         if (isPointerDown)
         {
             UpdatePlayer();
+        }
+        UseKeyboard();
+    }
+
+    private void UseKeyboard()
+    {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            playerMove.MoveLeft(-1);
+        } else if (Input.GetKeyDown(KeyCode.D))
+        {
+            playerMove.MoveRight(1);
+        }
+        if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
+        {
+            playerMove.Stop();
+        }
+        if (Input.GetKey(KeyCode.W))
+        {
+            playerMove.Jump();
+        }else if (Input.GetKey(KeyCode.S))
+        {
+            playerMove.Duck();
+        }
+        if (Input.GetKeyUp(KeyCode.S))
+        {
+            playerMove.Standing();
         }
     }
 

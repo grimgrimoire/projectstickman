@@ -7,7 +7,7 @@ public class Dpad : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDrag
 
 	public RectTransform directionalPad;
 	public PlayerMovement player;
-	public StartAnimasi anim;
+	public PlayerAnimation anim;
 
 	public AudioClip gunShot;
 	public AudioSource source;
@@ -62,7 +62,7 @@ public class Dpad : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDrag
 		directionalPad.anchoredPosition = Vector2.zero;
 		player.UpdateAim (0);
 		player.Stop ();
-		anim.stopanimation (directionalPad.anchoredPosition);
+		anim.StopMovement (directionalPad.anchoredPosition);
 	}
 
 	public void OnPointerDown (PointerEventData data)
@@ -102,7 +102,7 @@ public class Dpad : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDrag
 			player.MoveRight (directionalPad.anchoredPosition.x / 80);
 		} 
 		player.UpdateAim (GetAngle ());
-		anim.startanimation (directionalPad.anchoredPosition.x);
+		anim.StartWalking ();
 	}
 
 }

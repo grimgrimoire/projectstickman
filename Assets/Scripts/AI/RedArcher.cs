@@ -10,6 +10,7 @@ public class RedArcher : MonoBehaviour, IBaseEnemy
     public float attackRange = 15f;
     public float aimingDelay = 0.5f;
     public float attackDelay = 2f;
+    public float arrowArcHeight = 5;
     public GameObject arrowPrefab;
 
     bool isAttacking;
@@ -53,6 +54,7 @@ public class RedArcher : MonoBehaviour, IBaseEnemy
     {
         GameObject arrow = GameObject.Instantiate(arrowPrefab);
         arrow.transform.position = transform.position;
+        arrow.GetComponent<Projectile>().height = arrowArcHeight;
         arrow.GetComponent<Projectile>().SetTargetPosition(baseEnemy.GetPlayerPosition());
     }
 

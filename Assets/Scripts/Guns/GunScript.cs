@@ -9,12 +9,11 @@ public class GunScript : MonoBehaviour, IShootBullet
     public int bulletPerShot;
     public int damage;
     public float damageFalloff;
+    public bool isTwoHanded;
     public Transform weaponTarget;
     public GameObject bulletPrefab;
-    public AudioClip gunfire;
-    public AudioSource audioSource;
+    public Animator animator;
 
-    bool isTriggerHeld;
     IEnumerator gunFire;
     Transform player;
     GameObject bullet;
@@ -49,6 +48,7 @@ public class GunScript : MonoBehaviour, IShootBullet
             Vector2 target = weaponTarget.transform.right * player.localScale.x;
             target += (Random.insideUnitCircle) * (1 - (accuracy * 0.01f));
             RaycastHit2D hit = Physics2D.Raycast(weaponTarget.transform.position, target, Mathf.Infinity, targetMask);
+            animator.Play("Shoot", 3);
             if (hit)
             {
                 bullet.transform.position = weaponTarget.position;
@@ -62,8 +62,6 @@ public class GunScript : MonoBehaviour, IShootBullet
                     Destroy(hit.collider.gameObject);
                 }
             }
-            audioSource.PlayOneShot(gunfire);
-
             yield return new WaitForSeconds(fireRateDelay);
         } while (true);
 

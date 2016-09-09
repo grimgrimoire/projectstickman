@@ -18,6 +18,10 @@ public class AimPad : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDr
 		globalXDefault = joystickImage.position.x;
 		globalYDefault = joystickImage.position.y;
 		playerMove = player.GetComponent<PlayerMovement> ();
+        if(player == null)
+        {
+            GameObject.FindGameObjectWithTag(ConstMask.TAG_PLAYER);
+        }
 	}
 
 	// Update is called once per frame
