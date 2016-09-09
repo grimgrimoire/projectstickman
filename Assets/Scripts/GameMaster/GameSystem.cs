@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class GameSystem : MonoBehaviour {
 
     public string stageName = "STAGE_NAME";
+    public GameObject player;
 
     public List<EnemySpawn> enemySpawnerList;
 

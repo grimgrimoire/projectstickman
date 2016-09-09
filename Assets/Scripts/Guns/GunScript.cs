@@ -52,6 +52,7 @@ public class GunScript : MonoBehaviour, IShootBullet
             if (hit)
             {
                 bullet.transform.position = weaponTarget.position;
+                bullet.transform.rotation = weaponTarget.rotation;
                 bullet.GetComponent<Projectile>().SetTargetPosition(hit.point);
                 if (hit.collider.gameObject.tag.Equals(ConstMask.TAG_ENEMY))
                 {

@@ -73,8 +73,6 @@ public class BaseEnemy : MonoBehaviour
         if (health <= 0)
         {
             iBaseEnemy.Dead();
-            gameObject.layer = 12;
-            gameObject.tag = "Untagged";
             StartCoroutine(Unspawn());
         }
         //GameObject.Find("UI").GetComponent<DamageTextHandler>().ShowDamage(damage, transform.position);

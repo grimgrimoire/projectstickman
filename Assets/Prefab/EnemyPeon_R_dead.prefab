@@ -217,6 +217,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000011793761224}
+  - 114: {fileID: 114000012064022330}
   m_Layer: 12
   m_Name: EnemyPeon_R_dead
   m_TagString: Hostile
@@ -732,6 +733,17 @@ BoxCollider2D:
   m_Offset: {x: 0.11579803, y: 0.04962802}
   serializedVersion: 2
   m_Size: {x: 0.79, y: 5.06}
+--- !u!114 &114000012064022330
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014086240982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 909a932c05ad85e4cb2c9bcc63b217b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212000010120608928
 SpriteRenderer:
   m_ObjectHideFlags: 1

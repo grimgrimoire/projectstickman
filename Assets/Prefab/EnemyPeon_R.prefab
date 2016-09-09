@@ -590,11 +590,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ada4199ccd4c1c54a89abb0c86615646, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRange: 100
+  attackRange: 15
   aimingDelay: 0.5
   attackDelay: 2
+  arrowArcHeight: 5
   arrowPrefab: {fileID: 1000010922436130, guid: 08920b2d8c7a7a04eaee353fb1204f9a,
     type: 2}
+  prefabDead: {fileID: 1000014086240982, guid: 8170d1c4ed9d88144ae381f41f096b9e, type: 2}
 --- !u!114 &114000013409938400
 MonoBehaviour:
   m_ObjectHideFlags: 1
