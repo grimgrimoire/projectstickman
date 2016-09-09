@@ -12,6 +12,7 @@ public class RedArcher : MonoBehaviour, IBaseEnemy
     public float attackDelay = 2f;
     public GameObject arrowPrefab;
 
+    public GameObject prefabDead;
     bool isAttacking;
     Animator animator;
     BaseEnemy baseEnemy;
@@ -109,7 +110,9 @@ public class RedArcher : MonoBehaviour, IBaseEnemy
 
     public void Dead()
     {
-        animator.Play("EnemyDead");
+        animator.Play("Stop");
+        GameObject wreckClone = (GameObject)Instantiate(prefabDead, transform.position, transform.rotation);
+        Destroy(wreckClone, 3);
         StopAllCoroutines();
     }
 }

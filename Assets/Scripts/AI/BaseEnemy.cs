@@ -88,7 +88,7 @@ public class BaseEnemy : MonoBehaviour
 
     IEnumerator Unspawn()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(0);
         Destroy(this.gameObject);
     }
 
