@@ -75,15 +75,9 @@ public class Projectile : MonoBehaviour
             if (collider.gameObject.tag == "World")
             {
                 StopCoroutine(arrowMovement);
-                StartCoroutine(DestroySelf(3f));
+                Destroy(this.gameObject, 3);
             }
         }
     }
 
-    IEnumerator DestroySelf(float dur)
-    {
-        hitBox.enabled = false;
-        yield return new WaitForSeconds(dur);
-        Destroy(this.gameObject);
-    }
 }

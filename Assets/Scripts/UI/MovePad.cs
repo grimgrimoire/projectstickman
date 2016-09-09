@@ -37,10 +37,10 @@ public class MovePad : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, ID
 
     private void UseKeyboard()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKey(KeyCode.A))
         {
             playerMove.MoveLeft(-1);
-        } else if (Input.GetKeyDown(KeyCode.D))
+        } else if (Input.GetKey(KeyCode.D))
         {
             playerMove.MoveRight(1);
         }
