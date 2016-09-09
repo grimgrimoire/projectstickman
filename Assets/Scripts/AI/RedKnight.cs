@@ -7,7 +7,9 @@ public class RedKnight : MonoBehaviour, IBaseEnemy
     static string ATTACK = "AttackEnemy_M";
     static string IDLE = "Idle";
 
+    public GameObject prefabDead;
     Animator animator;
+
     bool isAttacking = false;
 
     // Use this for initialization
@@ -60,6 +62,9 @@ public class RedKnight : MonoBehaviour, IBaseEnemy
 
     public void Dead()
     {
-        animator.Play("EnemyDead");
+        animator.Play("Stop");
+        GameObject wreckClone = (GameObject)Instantiate(prefabDead, transform.position, transform.rotation);
+        Destroy(wreckClone,3);
     }
+
 }
