@@ -593,8 +593,10 @@ MonoBehaviour:
   attackRange: 100
   aimingDelay: 0.5
   attackDelay: 2
+  arrowArcHeight: 5
   arrowPrefab: {fileID: 1000010922436130, guid: 08920b2d8c7a7a04eaee353fb1204f9a,
     type: 2}
+  prefabDead: {fileID: 1000012399465048, guid: c862f0489533d384da328414a644ad51, type: 2}
 --- !u!114 &114000013409938400
 MonoBehaviour:
   m_ObjectHideFlags: 1
