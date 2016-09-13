@@ -32,23 +32,29 @@ public class AimPad : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDr
 	public void OnDrag (PointerEventData data)
 	{
 		UpdateButtonPosition (data);
-		playerMove.UpdateAim (GetAngle());
-		if (joystickImage.anchoredPosition.x < 0)
-			playerMove.LookLeft ();
-		else if(joystickImage.anchoredPosition.x > 0)
-			playerMove.LookRight ();
+        UpdatePlayerLook();
+        playerMove.UpdateAim (GetAngle());
 	}
+
+    private void UpdatePlayerLook()
+    {
+        if (joystickImage.anchoredPosition.x < 0)
+            playerMove.LookLeft();
+        else if (joystickImage.anchoredPosition.x > 0)
+            playerMove.LookRight();
+    }
 
 	public void OnPointerUp (PointerEventData data)
 	{
 		playerMove.RemoveTrigger ();
 		joystickImage.anchoredPosition = Vector2.zero;
-		playerMove.UpdateAim (90);
+		//playerMove.UpdateAim (90);
 	}
 
 	public void OnPointerDown (PointerEventData data)
 	{
         UpdateButtonPosition(data);
+        UpdatePlayerLook();
         playerMove.UpdateAim(GetAngle());
         playerMove.HoldTrigger ();
     }

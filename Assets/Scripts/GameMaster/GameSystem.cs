@@ -5,11 +5,16 @@ using System.Collections.Generic;
 public class GameSystem : MonoBehaviour {
 
     public string stageName = "STAGE_NAME";
+    public GameObject player;
+    public Transform playerRespawnPoint;
 
     public List<EnemySpawn> enemySpawnerList;
+    private PlayerMovement pMovement;
+    private PlayerUI pUI;
 
 	// Use this for initialization
 	void Start () {
+        pUI = GameObject.Find("UI").GetComponent<PlayerUI>();
     }
 	
 	// Update is called once per frame
@@ -31,21 +36,33 @@ public class GameSystem : MonoBehaviour {
         enemySpawnerList.Add(spawner);
     }
 
+    public void Respawn()
+    {
+        pMovement.SetAlive(true);
+        player.transform.position = playerRespawnPoint.position;
+    }
+
     public void GameOver()
     {
-
+        pMovement.SetAlive(false);
     }
 
     public void RestartGame()
     {
-
     }
 
-    public void StartSpawnEnemy()
+    public void StartGame()
     {
-        foreach(EnemySpawn spawn in enemySpawnerList)
+        pMovement = player.GetComponent<PlayerMovement>();
+        pMovement.SetAlive(true);
+        foreach (EnemySpawn spawn in enemySpawnerList)
         {
             spawn.StartSpawnEnemy();
         }
+    }
+
+    private void GetPlayerMovement()
+    {
+        pMovement = player.GetComponent<PlayerMovement>();
     }
 }
