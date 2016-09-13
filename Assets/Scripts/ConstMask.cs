@@ -15,4 +15,5 @@ public class ConstMask {
     public const int MASK_DEAD = 1 << 12;
     public const int MASK_SPAWNAREA = 1 << 13;
 
+    public const string GAME_SYSTEM = "GameSystem";
 }

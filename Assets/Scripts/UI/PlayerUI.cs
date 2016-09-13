@@ -14,6 +14,7 @@ public class PlayerUI : MonoBehaviour {
     public int waveNumberInt;
     public int playerLiveInt = 3;
     public float playerHealth = 100;
+    private float playerFullHealth;
 
     GameSystem gameSystem;
 
@@ -24,6 +25,9 @@ public class PlayerUI : MonoBehaviour {
         {
             throw new System.Exception("Fatal error: Game system is not found!!");
         }
+
+        playerFullHealth = playerHealth;
+
         StartCoroutine(StartGameSquence());
     }
 
@@ -33,7 +37,7 @@ public class PlayerUI : MonoBehaviour {
         yield return new WaitForSeconds(1f);
         curtain.SetActive(false);
         mainLabel.enabled = false;
-        gameSystem.StartSpawnEnemy();
+        gameSystem.StartGame();
     }
 	
 	// Update is called once per frame
@@ -44,21 +48,35 @@ public class PlayerUI : MonoBehaviour {
     public void PlayerTakeDamage(int damage)
     {
         playerHealth -= damage;
-        UpdatePlayerHealth(damage);
+        UpdatePlayerHealth();
         if(playerHealth <= 0)
         {
             PlayerDie();
         }
     }
 
-    public void UpdatePlayerHealth(int damage)
+    public void UpdatePlayerHealth()
     {
-        playerHealthBar.sizeDelta = new Vector2(playerHealth * 3, 50);
+        playerHealthBar.sizeDelta = new Vector2(playerHealth/playerFullHealth * 300, 50);
     }
 
     public void PlayerDie()
     {
-
+        playerLiveInt--;
+        if (playerLiveInt >= 0)
+        {
+            playerHealth = playerFullHealth;
+            UpdatePlayerHealth();
+            playerLive.text = "X" + playerLiveInt;
+            gameSystem.Respawn();
+        }
+        else
+        {
+            mainLabel.enabled = true;
+            mainLabel.text = "YOU DIE";
+            gameSystem.GameOver();
+        }
     }
+
 
 }

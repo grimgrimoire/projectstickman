@@ -1,1 +1,4 @@
 Things to do
+Loadout UI
+Better AI
+Boss AI

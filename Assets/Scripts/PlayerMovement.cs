@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 5f;
     public float jumpHeight = 8f;
     bool isGrounded;
+    bool isAlive;
     Rigidbody2D rigid;
     bool canMove;
     GunScript gun;
@@ -19,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody2D>();
         gun = GetComponentInChildren<GunScript>();
-        if(playerAnimation == null)
+        if (playerAnimation == null)
         {
             playerAnimation = GetComponentInChildren<PlayerAnimation>();
         }
@@ -28,12 +29,12 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RaycastHit2D ray = Physics2D.Raycast(transform.position, Vector2.down, 1.1f, 512);
-        isGrounded = ray;
-        if (ray)
-        {
-            Debug.DrawLine(transform.position, ray.point, Color.red, 0.1f);
-        }
+        isGrounded = Physics2D.Raycast(transform.position, Vector2.down, 1.1f, ConstMask.MASK_WORLD);
+    }
+
+    public void SetAlive(bool isAlive)
+    {
+        this.isAlive = isAlive;
     }
 
     public void updateWeaponHold(bool isTwoHanded)
@@ -53,13 +54,13 @@ public class PlayerMovement : MonoBehaviour
 
     public void UpdateAim(float angle)
     {
-        //playerAimingArm.transform.localEulerAngles = new Vector3(0, 0, 300 + angle);
-        playerAnimation.SetFloat("Aim", angle / 180);
+        if(isAlive)
+            playerAnimation.SetFloat("Aim", angle / 180);
     }
 
     public void MoveRight(float multiplier)
     {
-        if (canMove)
+        if (canMove && isAlive)
         {
             rigid.velocity = new Vector2(moveSpeed, rigid.velocity.y);
             if (isGrounded)
@@ -71,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void MoveLeft(float multiplier)
     {
-        if (canMove)
+        if (canMove && isAlive)
         {
             rigid.velocity = new Vector2(-moveSpeed, rigid.velocity.y);
             if (isGrounded)
@@ -83,12 +84,14 @@ public class PlayerMovement : MonoBehaviour
 
     public void LookRight()
     {
-        transform.localScale = new Vector3(1, 1, 1);
+        if (isAlive)
+            transform.localScale = new Vector3(1, 1, 1);
     }
 
     public void LookLeft()
     {
-        transform.localScale = new Vector3(-1, 1, 1);
+        if (isAlive)
+            transform.localScale = new Vector3(-1, 1, 1);
     }
 
     public void Standing()
@@ -98,7 +101,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Jump()
     {
-        if (isGrounded)
+        if (isGrounded && isAlive)
         {
             rigid.velocity = new Vector2(rigid.velocity.x, jumpHeight);
             playerAnimation.Jump();
@@ -107,7 +110,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Duck()
     {
-        if (isGrounded)
+        if (isGrounded && isAlive)
         {
             canMove = false;
             rigid.velocity = new Vector2(0, -4);

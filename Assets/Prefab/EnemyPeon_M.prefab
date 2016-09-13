@@ -352,7 +352,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013267949544}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.92, y: -3.85, z: 0}
+  m_LocalPosition: {x: -9.653667, y: 2.17, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -524,12 +524,12 @@ BoxCollider2D:
   m_GameObject: {fileID: 1000013267949544}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 36abb55e19b128e4b8c4f1a936bd9554, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0.07796621, y: -0.16428721}
+  m_Offset: {x: 0.027967453, y: -0.16428709}
   serializedVersion: 2
-  m_Size: {x: 1.1559327, y: 1.9806557}
+  m_Size: {x: 0.65593255, y: 1.9806557}
 --- !u!95 &95000010484158616
 Animator:
   serializedVersion: 3
@@ -580,7 +580,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 7
-  jumpHeight: 8
+  jumpHeight: 15
   health: 20
   healthBarParent: {fileID: 1000011342519894}
 --- !u!114 &114000011337197680
