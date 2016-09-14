@@ -61,11 +61,12 @@ public class Projectile : MonoBehaviour
 
     IEnumerator BulletMovement()
     {
-        while (true)
+        while (Vector2.Distance(transform.position, target) > 0.1f)
         {
             yield return new WaitForEndOfFrame();
             transform.position = Vector2.MoveTowards(new Vector2(transform.position.x, transform.position.y), target, 100 * Time.deltaTime);
         }
+        Destroy(this.gameObject);
     }
 
     void OnTriggerEnter2D(Collider2D collider)

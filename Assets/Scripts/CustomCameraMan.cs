@@ -18,8 +18,7 @@ public class CustomCameraMan : MonoBehaviour
     void Update()
     {
         if (player != null)
-            if (player.transform.position.x >= leftLimit && player.transform.position.x <= rightLimit)
-                transform.position = new Vector3(player.transform.position.x, transform.position.y, -10);
+            transform.position = new Vector3(Mathf.Clamp(player.transform.position.x, leftLimit, rightLimit), transform.position.y, -10);
     }
 
     void Awake()

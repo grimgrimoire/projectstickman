@@ -54,15 +54,6 @@ public class BaseEnemy : MonoBehaviour
             RaycastHit2D ground1 = Physics2D.Raycast(transform.position - new Vector3((hitbox.bounds.size.x / 2) - hitbox.offset.x, 0), Vector2.down, 1.2f, ConstMask.MASK_WORLD);
             RaycastHit2D ground2 = Physics2D.Raycast(transform.position + new Vector3((hitbox.bounds.size.x / 2) + hitbox.offset.x, 0), Vector2.down, 1.2f, ConstMask.MASK_WORLD);
             isGrounded = ground1 || ground2;
-            if (ground1)
-            {
-                Debug.DrawLine(transform.position - new Vector3((hitbox.bounds.size.x / 2) - hitbox.offset.x, 0), ground1.point, Color.red, 0.1f);
-            }
-            if (ground2)
-            {
-                Debug.DrawLine(transform.position + new Vector3((hitbox.bounds.size.x / 2) + hitbox.offset.x, 0), ground2.point, Color.blue, 0.1f);
-            }
-            LookAtPlayer();
             UpdatePositions();
             ChasePlayer();
             AttackPlayer();
@@ -123,25 +114,16 @@ public class BaseEnemy : MonoBehaviour
     private void ShowDebug()
     {
         if (distanceFromPlayer < iBaseEnemy.AttackRange())
-            Debug.DrawLine(transform.position, playerPosition, Color.red, 0.1f);
+            if(HasLineOfSight())
+                Debug.DrawLine(transform.position, playerPosition, Color.red, 0.1f);
+            else
+                Debug.DrawLine(transform.position, playerPosition, Color.blue, 0.1f);
     }
 
     private void UpdatePositions()
     {
         playerPosition = player.transform.position;
         distanceFromPlayer = Vector3.Distance(transform.position, playerPosition);
-    }
-
-    private void LookAtPlayer()
-    {
-        if (iBaseEnemy.CanMove())
-        {
-            if (playerPosition.x < transform.position.x && !IsNextToPlayerHorizontally())
-                transform.localScale = new Vector3(-scale, transform.localScale.y, transform.localScale.z);
-            else if (playerPosition.x > transform.position.x && !IsNextToPlayerHorizontally())
-                transform.localScale = new Vector3(scale, transform.localScale.y, transform.localScale.z);
-        }
-
     }
 
     private void ChasePlayer()
@@ -158,28 +140,23 @@ public class BaseEnemy : MonoBehaviour
 
     private void TryChasePlayer()
     {
-        if ((distanceFromPlayer >= iBaseEnemy.AttackRange() || isRespawn))
+        if (!IsNextToPlayerHorizontally() && !PlayerOnLowerElevation() && (distanceFromPlayer > iBaseEnemy.AttackRange() || !HasLineOfSight()))
         {
-            if (PlayerOnLowerElevation())
-            {
-                rigidBody.velocity = new Vector2(walkSpeed * transform.localScale.x, rigidBody.velocity.y);
-                iBaseEnemy.WalkAnimation();
-            }
-            else if (!PlayerOnLowerElevation() && !IsNextToPlayerHorizontally())
-            {
-                rigidBody.velocity = new Vector2(walkSpeed * transform.localScale.x, rigidBody.velocity.y);
-                iBaseEnemy.WalkAnimation();
-            }
-            else
-                StopMoving();
+            DirectlyChasePlayer();
         }
-        else
+        if (PlayerOnLowerElevation() && (distanceFromPlayer > iBaseEnemy.AttackRange() || !HasLineOfSight()))
         {
-            StopMoving();
+            if(isGrounded)
+                WalkStraight();
+            else if(!isGrounded)
+            {
+                if (rigidBody.velocity.y < -1)
+                    DirectlyChasePlayer();
+            }
         }
         bool wall = Physics2D.Raycast(transform.position, Vector2.right * transform.localScale.x, 1, ConstMask.MASK_WORLD);
         bool ground = Physics2D.Raycast(transform.position, (Vector2.right * transform.localScale.x) + Vector2.down, 2, ConstMask.MASK_WORLD);
-        if ((!IsNextToPlayerHorizontally() || PlayerOnHigherElevation()) && isGrounded && wall)
+        if ((!IsNextToPlayerHorizontally() || PlayerOnHigherElevation()) && isGrounded && wall && IsFacingPlayer())
         {
             Jump();
         }
@@ -187,6 +164,58 @@ public class BaseEnemy : MonoBehaviour
         {
             SmallJump();
         }
+    }
+
+    private bool IsFacingPlayer()
+    {
+        if (transform.localScale.x > 0 && transform.position.x < playerPosition.x)
+        {
+            return true;
+        }
+        else if (transform.localScale.x < 0 && transform.position.x > playerPosition.x)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
+    private void DirectlyChasePlayer()
+    {
+        if (playerPosition.x - transform.position.x > 0)
+        {
+            WalkRight();
+        }
+        else if (playerPosition.x - transform.position.x < 0)
+        {
+            WalkLeft();
+        }
+        else
+        {
+            StopMoving();
+        }
+    }
+
+    public void WalkStraight()
+    {
+        rigidBody.velocity = new Vector2(walkSpeed * transform.localScale.x, rigidBody.velocity.y);
+        iBaseEnemy.WalkAnimation();
+    }
+
+    public void WalkRight()
+    {
+        transform.localScale = new Vector3(scale, transform.localScale.y, transform.localScale.z);
+        rigidBody.velocity = new Vector2(walkSpeed * transform.localScale.x, rigidBody.velocity.y);
+        iBaseEnemy.WalkAnimation();
+    }
+
+    public void WalkLeft()
+    {
+        transform.localScale = new Vector3(-scale, transform.localScale.y, transform.localScale.z);
+        rigidBody.velocity = new Vector2(walkSpeed * transform.localScale.x, rigidBody.velocity.y);
+        iBaseEnemy.WalkAnimation();
     }
 
     private void StopMoving()
@@ -222,10 +251,16 @@ public class BaseEnemy : MonoBehaviour
 
     protected void AttackPlayer()
     {
-        if (distanceFromPlayer <= iBaseEnemy.AttackRange() && !isRespawn && isGrounded)
+        if (distanceFromPlayer <= iBaseEnemy.AttackRange() && !isRespawn)
         {
             iBaseEnemy.Attack();
         }
+    }
+
+    public bool HasLineOfSight()
+    {
+        RaycastHit2D ray = Physics2D.Raycast(transform.position, playerPosition - transform.position, Mathf.Infinity, ConstMask.MASK_WORLD | ConstMask.MASK_PLAYER);
+        return ray.collider.gameObject.tag == ConstMask.TAG_PLAYER;
     }
 
 }
