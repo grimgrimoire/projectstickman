@@ -62,7 +62,6 @@ public class RedKnight : MonoBehaviour, IBaseEnemy
 
     public void Dead()
     {
-        animator.Play("Stop");
         GameObject wreckClone = (GameObject)Instantiate(prefabDead, transform.position, transform.rotation);
         wreckClone.transform.localScale = transform.localScale;
         Destroy(wreckClone,3);

@@ -266,6 +266,7 @@ GameObject:
   - 61: {fileID: 61000012944713366}
   - 114: {fileID: 114000013647132590}
   - 114: {fileID: 114000010437063862}
+  - 114: {fileID: 114000011309673588}
   m_Layer: 11
   m_Name: EnemyPeon_M
   m_TagString: Hostile
@@ -352,7 +353,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013267949544}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.83, y: 1.21, z: 0}
+  m_LocalPosition: {x: -10.137339, y: -3.1721282, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -579,10 +580,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b45ef1283b171c148a8330f4c22cdc7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 7
-  jumpHeight: 15
   health: 20
   healthBarParent: {fileID: 1000011342519894}
+--- !u!114 &114000011309673588
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013267949544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c183dbc1250bf1e40a3a0d0abe891de7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkSpeed: 7
+  jumpHeight: 10
 --- !u!114 &114000011337197680
 MonoBehaviour:
   m_ObjectHideFlags: 1

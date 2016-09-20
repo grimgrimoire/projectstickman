@@ -233,6 +233,7 @@ GameObject:
   - 61: {fileID: 61000013314119330}
   - 114: {fileID: 114000013409938400}
   - 114: {fileID: 114000012848776380}
+  - 114: {fileID: 114000013034197748}
   m_Layer: 11
   m_Name: EnemyPeon_R
   m_TagString: Hostile
@@ -294,7 +295,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013108512568}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.6973333, y: 0.7485192, z: 0}
+  m_LocalPosition: {x: -6.0500374, y: -1.0849957, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -391,7 +392,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012313889776}
-  m_LocalRotation: {x: -0, y: -0, z: 0.5983818, w: -0.8012111}
+  m_LocalRotation: {x: -0, y: -0, z: 0.59842557, w: -0.80117846}
   m_LocalPosition: {x: -0.26044765, y: 0.38162625, z: 0}
   m_LocalScale: {x: 0.779766, y: 0.88843024, z: 0.9058577}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -12.669001}
@@ -450,7 +451,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013064846432}
-  m_LocalRotation: {x: -0, y: 0, z: -0.34777012, w: -0.9375798}
+  m_LocalRotation: {x: -0, y: 0, z: -0.34782135, w: -0.9375609}
   m_LocalPosition: {x: 2.14, y: 1.02, z: -30.66383}
   m_LocalScale: {x: 3.0630298, y: 3.069655, z: 3.0663831}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -597,6 +598,19 @@ MonoBehaviour:
   arrowPrefab: {fileID: 1000010922436130, guid: 08920b2d8c7a7a04eaee353fb1204f9a,
     type: 2}
   prefabDead: {fileID: 1000014086240982, guid: 8170d1c4ed9d88144ae381f41f096b9e, type: 2}
+--- !u!114 &114000013034197748
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013108512568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c183dbc1250bf1e40a3a0d0abe891de7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkSpeed: 5
+  jumpHeight: 10
 --- !u!114 &114000013409938400
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -608,8 +622,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b45ef1283b171c148a8330f4c22cdc7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 4
-  jumpHeight: 10
   health: 15
   healthBarParent: {fileID: 1000011544808194}
 --- !u!114 &114000014072111938

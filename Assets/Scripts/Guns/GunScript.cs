@@ -7,7 +7,8 @@ public class GunScript : MonoBehaviour, IShootBullet
     public float accuracy;
     public float fireRateDelay;
     public int bulletPerShot;
-    public int damage;
+    public int minDamage;
+    public int maxDamage;
     public float damageFalloff;
     public bool isTwoHanded;
     public bool isAutomatic;
@@ -28,11 +29,27 @@ public class GunScript : MonoBehaviour, IShootBullet
 
     void Start()
     {
+        animator.SetBool("IsTwoHanded", isTwoHanded);
     }
 
     void Update()
     {
 
+    }
+
+    public void ChangeWeapon(WeaponsPrefab weapon)
+    {
+        accuracy = weapon.accuracy;
+        fireRateDelay = weapon.fireRateDelay;
+        bulletPerShot = weapon.bulletPerShot;
+        minDamage = weapon.minDamage;
+        maxDamage = weapon.maxDamage;
+        damageFalloff = weapon.damageFalloff;
+        isTwoHanded = weapon.isTwoHanded;
+        isAutomatic = weapon.isAutomatic;
+        weaponTarget.localPosition = weapon.weaponTargetPosition;
+        animator.SetBool("IsTwoHanded", isTwoHanded);
+        GetComponent<SpriteRenderer>().sprite = Resources.LoadAll<Sprite>("Images/Weapon1")[weapon.spriteIndex];
     }
 
     public void HoldTrigger()
@@ -56,6 +73,7 @@ public class GunScript : MonoBehaviour, IShootBullet
 
     IEnumerator ManualGunFire()
     {
+        yield return new WaitForEndOfFrame();
         player = GameObject.FindGameObjectWithTag(ConstMask.TAG_PLAYER).GetComponent<Transform>();
         ShootBullets();
         manualFireRateDelay = fireRateDelay;
@@ -88,12 +106,13 @@ public class GunScript : MonoBehaviour, IShootBullet
             bullet.GetComponent<Projectile>().SetTargetPosition(hit.point);
             if (hit.collider.gameObject.tag.Equals(ConstMask.TAG_ENEMY))
             {
-                hit.collider.gameObject.GetComponent<BaseEnemy>().TakeDamage(damage, hit.point);
+                if (Vector2.Distance(weaponTarget.position, hit.point) < damageFalloff)
+                    hit.collider.gameObject.GetComponent<BaseEnemy>().TakeDamage(Random.Range(minDamage, maxDamage), hit.point);
             }
-            if (hit.collider.gameObject.tag.Equals(ConstMask.TAG_PROJECTILE))
-            {
-                Destroy(hit.collider.gameObject);
-            }
+            //if (hit.collider.gameObject.tag.Equals(ConstMask.TAG_PROJECTILE))
+            //{
+            //    Destroy(hit.collider.gameObject);
+            //}
         }
     }
 

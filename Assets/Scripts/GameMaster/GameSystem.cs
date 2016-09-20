@@ -12,6 +12,11 @@ public class GameSystem : MonoBehaviour {
     private PlayerMovement pMovement;
     private PlayerUI pUI;
 
+    public static GameSystem GetGameSystem()
+    {
+        return GameObject.Find(ConstMask.GAME_SYSTEM).GetComponent<GameSystem>();
+    }
+
 	// Use this for initialization
 	void Start () {
         pUI = GameObject.Find("UI").GetComponent<PlayerUI>();
@@ -61,8 +66,19 @@ public class GameSystem : MonoBehaviour {
         }
     }
 
+    public void ChangeWeapon(WeaponsPrefab weapon)
+    {
+        pMovement.ChangeWeapon(weapon);
+    }
+
+    public void AddKillCount(int kill)
+    {
+        pUI.AddKillCount(kill);
+    }
+
     private void GetPlayerMovement()
     {
         pMovement = player.GetComponent<PlayerMovement>();
     }
+
 }
