@@ -7,6 +7,7 @@ public class Projectile : MonoBehaviour
     public bool isPersistOnHit = true;
     public float speed = 10;
     public float height = 10;
+    public float minSpeed = 0;
     private Vector2 target;
     private BoxCollider2D hitBox;
 
@@ -41,6 +42,7 @@ public class Projectile : MonoBehaviour
     {
         Vector3 tempStart1 = transform.position;
         float hMovement = Mathf.Clamp(target.x - transform.position.x, -speed, speed);
+        hMovement = Mathf.Abs(hMovement) > minSpeed ? hMovement : (hMovement / Mathf.Abs(hMovement)) * minSpeed;
         float compensation = Mathf.Abs((target.x - transform.position.x)) / Mathf.Abs(hMovement);
         float vMovement = compensation / 2 * height + (target.y - transform.position.y) / compensation;
         Vector2 diff;
@@ -61,20 +63,23 @@ public class Projectile : MonoBehaviour
 
     IEnumerator BulletMovement()
     {
-        while (true)
+        while (Vector2.Distance(transform.position, target) > 0.1f)
         {
             yield return new WaitForEndOfFrame();
             transform.position = Vector2.MoveTowards(new Vector2(transform.position.x, transform.position.y), target, 100 * Time.deltaTime);
         }
+        Destroy(this.gameObject);
     }
 
     void OnTriggerEnter2D(Collider2D collider)
     {
         if (isPersistOnHit)
         {
+            Debug.Log(collider.gameObject.tag);
             if (collider.gameObject.tag == "World")
             {
                 StopCoroutine(arrowMovement);
+                hitBox.enabled = false;
                 Destroy(this.gameObject, 3);
             }
         }

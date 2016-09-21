@@ -124,4 +124,9 @@ public class PlayerMovement : MonoBehaviour
         playerAnimation.StopMovement(Vector2.zero);
     }
 
+    public void ChangeWeapon(WeaponsPrefab weapon)
+    {
+        gun.ChangeWeapon(weapon);
+    }
+
 }

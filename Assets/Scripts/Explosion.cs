@@ -11,6 +11,7 @@ public class Explosion : MonoBehaviour {
         foreach (Rigidbody2D rigid in allRigidbody)
         {
             rigid.AddForce(Random.insideUnitSphere * 2, ForceMode2D.Impulse);
+            rigid.AddTorque(Random.value * 20);
         }
     }
 	

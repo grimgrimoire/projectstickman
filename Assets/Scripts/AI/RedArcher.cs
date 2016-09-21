@@ -34,7 +34,7 @@ public class RedArcher : MonoBehaviour, IBaseEnemy
 
     public void Attack()
     {
-        if (!isAttacking)
+        if (!isAttacking && baseEnemy.HasLineOfSight())
             StartCoroutine(ActionAttack());
     }
 
