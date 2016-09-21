@@ -4,10 +4,7 @@ using System;
 
 public class Boss1 : MonoBehaviour, IBaseEnemy
 {
-    public float walkSpeed = 4;
-    public GameObject prefabSpear;
-    public GameObject bossSpear;
-
+    public float walkSpeed = 2;
     GameObject player;
     Vector3 playerPosition;
     float distanceFromPlayer;
@@ -36,8 +33,8 @@ public class Boss1 : MonoBehaviour, IBaseEnemy
             cooldown -= Time.deltaTime;
         UpdatePositions();
         RollAttackPlayer();
-        //if (canMove)
-        //    WalkToPlayer();
+        if (canMove)
+            LookAtPlayer();
     }
 
     public void Attack()
@@ -141,15 +138,25 @@ public class Boss1 : MonoBehaviour, IBaseEnemy
     {
         if (canMove && cooldown <= 0)
         {
-            StartCoroutine(Attack3());
+            Debug.Log("Distance " + distanceFromPlayer);
+            if (distanceFromPlayer < 5)
+            {
+                StartCoroutine(Attack4());
+            }
+            else if (distanceFromPlayer < 7 && distanceFromPlayer > 5)
+            {
+                StartCoroutine(Attack2());
+            }
+            else
+            {
+                if (UnityEngine.Random.Range(1, 11) > 7)
+                    Attack3();
+                else
+                    StartCoroutine(Attack1());
+            }
         }
     }
 
-    IEnumerator Attack1Consequences()
-    {
-        yield return Attack2();
-        yield return Attack1();
-    }
 
     IEnumerator Attack1() // Throwing Spear
     {
@@ -157,17 +164,8 @@ public class Boss1 : MonoBehaviour, IBaseEnemy
         cooldown = 5f;
         canMove = false;
         SetAttackAnimation(1);
-        yield return new WaitForSeconds(1.58f);
-        LookAtPlayer();
-        GameObject spear = Instantiate(prefabSpear);
-        spear.transform.position = bossSpear.transform.position;
-        spear.transform.rotation = bossSpear.transform.rotation;
-        spear.GetComponent<Projectile>().minSpeed = 40;
-        spear.GetComponent<Projectile>().speed = 40;
-        spear.GetComponent<Projectile>().SetTargetPosition(playerPosition + new Vector3(0, 1));
-        SetAttackAnimation(0);
-        yield return new WaitForSeconds(0.5f);
-        canMove = true;
+        yield return new WaitForSeconds(3f);
+        yield return AttackDone();
     }
 
     IEnumerator Attack2() // Charge
@@ -186,19 +184,54 @@ public class Boss1 : MonoBehaviour, IBaseEnemy
             yield return new WaitForEndOfFrame();
         }
         walkSpeed = 4;
-        SetAttackAnimation(0);
         StopMoving();
+        yield return AttackDone();
+    }
+
+    public void Attack3() // Jump
+    {
+        cooldown = 7f;
+        canMove = false;
+        SetAttackAnimation(3);
+    }
+
+    IEnumerator Attack4()// Up thrust
+    {
+        cooldown = 3f;
+        canMove = false;
+        SetAttackAnimation(4);
+        yield return new WaitForSeconds(1.5f);
+        SetAttackAnimation(0);
         yield return new WaitForSeconds(0.5f);
         canMove = true;
     }
 
-    IEnumerator Attack3() // Jump
+    public void JumpToPlayer()
     {
-        cooldown = 5f;
-        canMove = false;
-        SetAttackAnimation(3);
-        yield return new WaitForSeconds(1.5f);
+        StartCoroutine(JumpTranslation());
+    }
+
+    IEnumerator JumpTranslation()
+    {
+        animator.speed = 0;
+        rigidBody.velocity = new Vector2((playerPosition.x - transform.position.x), 10);
+        while (rigidBody.velocity.y > 0)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        animator.speed = 1;
+        rigidBody.velocity = new Vector2(0, -20);
+        while (rigidBody.velocity.y < 0)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        yield return AttackDone();
+    }
+
+    IEnumerator AttackDone()
+    {
         SetAttackAnimation(0);
+        yield return new WaitForSeconds(0.5f);
         canMove = true;
     }
 

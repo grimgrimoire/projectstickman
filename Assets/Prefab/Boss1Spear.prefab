@@ -24,7 +24,7 @@ GameObject:
   - 61: {fileID: 61000011744400140}
   - 50: {fileID: 50000010287319238}
   m_Layer: 10
-  m_Name: GameObject
+  m_Name: Boss1Spear
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a41a61c249138de41b637f52f9d06d36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 50
+  damage: 30
 --- !u!212 &212000012495434112
 SpriteRenderer:
   m_ObjectHideFlags: 1
