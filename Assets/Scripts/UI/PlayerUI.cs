@@ -104,6 +104,7 @@ public class PlayerUI : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        if(eventData.pointerEnter!=null)
         if (eventData.pointerEnter.name == "EquipedWeapon")
         {
             gameSystem.ChangeWeapon(WeaponsList.Pistol());
