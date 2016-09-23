@@ -15,6 +15,7 @@ public class BaseEnemy : MonoBehaviour
     RectTransform healthBar;
     float maxHealth;
     bool isRespawn = true;
+    private EType eType;
 
     // Use this for initialization
     void Start()
@@ -38,7 +39,6 @@ public class BaseEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ShowDebug();
         if (health > 0)
         {
             UpdatePositions();
@@ -46,6 +46,11 @@ public class BaseEnemy : MonoBehaviour
             UpdateHealthBar();
         }
 
+    }
+
+    public void SetEType(EType eType)
+    {
+        this.eType = eType;
     }
 
     public float GetDistanceFromPlayer()
@@ -67,6 +72,7 @@ public class BaseEnemy : MonoBehaviour
             iBaseEnemy.Dead();
             StartCoroutine(Unspawn());
             GameSystem.GetGameSystem().AddKillCount(1);
+            GameSystem.GetGameSystem().KillEnemyOfType(eType);
         }
         //GameObject.Find("UI").GetComponent<DamageTextHandler>().ShowDamage(damage, transform.position);
     }
@@ -98,14 +104,6 @@ public class BaseEnemy : MonoBehaviour
         }
     }
 
-    private void ShowDebug()
-    {
-        if (distanceFromPlayer < iBaseEnemy.AttackRange())
-            if (HasLineOfSight())
-                Debug.DrawLine(transform.position, playerPosition, Color.red, 0.1f);
-            else
-                Debug.DrawLine(transform.position, playerPosition, Color.blue, 0.1f);
-    }
 
     protected void AttackPlayer()
     {
@@ -117,7 +115,7 @@ public class BaseEnemy : MonoBehaviour
 
     public bool HasLineOfSight()
     {
-        RaycastHit2D ray = Physics2D.Raycast(transform.position, playerPosition - transform.position, Mathf.Infinity, ConstMask.MASK_WORLD | ConstMask.MASK_PLAYER);
+        RaycastHit2D ray = Physics2D.Raycast(transform.position, playerPosition - transform.position, Mathf.Infinity, ConstMask.MASK_WORLD | ConstMask.MASK_PLAYER | ConstMask.MASK_SPAWNAREA);
         if (ray)
             return ray.collider.gameObject.tag == ConstMask.TAG_PLAYER;
         else

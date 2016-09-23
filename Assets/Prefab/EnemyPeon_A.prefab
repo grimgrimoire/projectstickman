@@ -72,6 +72,7 @@ GameObject:
   - 50: {fileID: 50000011155657778}
   - 61: {fileID: 61000011175800504}
   - 114: {fileID: 114000013040358716}
+  - 114: {fileID: 114000011075892286}
   m_Layer: 11
   m_Name: EnemyPeon_A
   m_TagString: Hostile
@@ -181,9 +182,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: -0.0369606, y: -0.0023617744}
+  m_Offset: {x: -0.0369606, y: 0.0028495789}
   serializedVersion: 2
-  m_Size: {x: 2.9891913, y: 4.2717896}
+  m_Size: {x: 2.9891913, y: 4.0529556}
 --- !u!95 &95000011190800126
 Animator:
   serializedVersion: 3
@@ -201,6 +202,19 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114000011075892286
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013158199656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b45ef1283b171c148a8330f4c22cdc7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 20
+  healthBarParent: {fileID: 1000013275889234}
 --- !u!114 &114000012198243684
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -243,8 +257,6 @@ MonoBehaviour:
   Height: 10
   attackDelay: 5
   moveSpeed: 7
-  healthBarParent: {fileID: 1000013275889234}
-  health: 20
   arrowPrefab: {fileID: 1000010922436130, guid: 08920b2d8c7a7a04eaee353fb1204f9a,
     type: 2}
 --- !u!114 &114000013839214144

@@ -13,9 +13,11 @@ public class Boss1 : MonoBehaviour, IBaseEnemy
     Rigidbody2D rigidBody;
     private float scale;
 
-    float cooldown = 2;
+    float cooldown = 0;
 
     private static String ATTACK = "AttackState";
+    private static String WALK = "Walk";
+    private float speedModifier = 1f;
 
     // Use this for initialization
     void Start()
@@ -24,13 +26,12 @@ public class Boss1 : MonoBehaviour, IBaseEnemy
         rigidBody = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player");
         scale = transform.localScale.x;
+        animator.speed = animator.speed / speedModifier;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (cooldown > 0)
-            cooldown -= Time.deltaTime;
         UpdatePositions();
         RollAttackPlayer();
         if (canMove)
@@ -103,6 +104,11 @@ public class Boss1 : MonoBehaviour, IBaseEnemy
         rigidBody.velocity = new Vector2(walkSpeed * transform.localScale.x, rigidBody.velocity.y);
     }
 
+    public void WalkBack()
+    {
+        rigidBody.velocity = new Vector2(walkSpeed * transform.localScale.x * -1, rigidBody.velocity.y);
+    }
+
     public void WalkRight()
     {
         rigidBody.velocity = new Vector2(walkSpeed, rigidBody.velocity.y);
@@ -138,7 +144,6 @@ public class Boss1 : MonoBehaviour, IBaseEnemy
     {
         if (canMove && cooldown <= 0)
         {
-            Debug.Log("Distance " + distanceFromPlayer);
             if (distanceFromPlayer < 5)
             {
                 StartCoroutine(Attack4());
@@ -149,7 +154,7 @@ public class Boss1 : MonoBehaviour, IBaseEnemy
             }
             else
             {
-                if (UnityEngine.Random.Range(1, 11) > 7)
+                if (UnityEngine.Random.Range(1, 11) > 6)
                     Attack3();
                 else
                     StartCoroutine(Attack1());
@@ -161,19 +166,19 @@ public class Boss1 : MonoBehaviour, IBaseEnemy
     IEnumerator Attack1() // Throwing Spear
     {
         LookAtPlayer();
-        cooldown = 5f;
+        cooldown = 1f * speedModifier;
         canMove = false;
         SetAttackAnimation(1);
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(3f * speedModifier);
         yield return AttackDone();
     }
 
     IEnumerator Attack2() // Charge
     {
-        cooldown = 7f;
+        cooldown = 1f * speedModifier;
         SetAttackAnimation(2);
         canMove = false;
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(2 * speedModifier);
         SetAttackAnimation(4);
         float delta = 0.5f;
         walkSpeed = 20;
@@ -190,20 +195,19 @@ public class Boss1 : MonoBehaviour, IBaseEnemy
 
     public void Attack3() // Jump
     {
-        cooldown = 7f;
+        LookAtPlayer();
+        cooldown = 2f * speedModifier;
         canMove = false;
         SetAttackAnimation(3);
     }
 
     IEnumerator Attack4()// Up thrust
     {
-        cooldown = 3f;
+        cooldown = 1f * speedModifier;
         canMove = false;
         SetAttackAnimation(4);
-        yield return new WaitForSeconds(1.5f);
-        SetAttackAnimation(0);
-        yield return new WaitForSeconds(0.5f);
-        canMove = true;
+        yield return new WaitForSeconds(1.5f * speedModifier);
+        yield return AttackDone();
     }
 
     public void JumpToPlayer()
@@ -225,6 +229,7 @@ public class Boss1 : MonoBehaviour, IBaseEnemy
         {
             yield return new WaitForEndOfFrame();
         }
+        yield return new WaitForSeconds(1f * speedModifier);
         yield return AttackDone();
     }
 
@@ -233,10 +238,33 @@ public class Boss1 : MonoBehaviour, IBaseEnemy
         SetAttackAnimation(0);
         yield return new WaitForSeconds(0.5f);
         canMove = true;
+        StartCoroutine(RandomWalk());
     }
 
     private void SetAttackAnimation(int value)
     {
         animator.SetInteger(ATTACK, value);
+    }
+
+    private void StartWalkAnimation(int value)
+    {
+        animator.SetInteger(WALK, value);
+    }
+
+    IEnumerator RandomWalk()
+    {
+        int direction = UnityEngine.Random.Range(-1, 2);
+        StartWalkAnimation(direction);
+        while (cooldown > 0)
+        {
+            if (cooldown > 0)
+                cooldown -= Time.deltaTime;
+            if (direction == -1)
+                WalkBack();
+            else if (direction == 1)
+                WalkStraight();
+            yield return new WaitForEndOfFrame();
+        }
+        StartWalkAnimation(0);
     }
 }

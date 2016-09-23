@@ -21,6 +21,8 @@ public class RedArcher : MonoBehaviour, IBaseEnemy
     // Use this for initialization
     void Start()
     {
+        attackRange = attackRange + UnityEngine.Random.Range(-3f, 3f);
+        arrowArcHeight = arrowArcHeight + UnityEngine.Random.Range(-2f, 2f);
         animator = GetComponentInChildren<Animator>();
         baseEnemy = GetComponent<BaseEnemy>();
         animator.Play(ATTACK, 1);
@@ -34,7 +36,7 @@ public class RedArcher : MonoBehaviour, IBaseEnemy
 
     public void Attack()
     {
-        if (!isAttacking && baseEnemy.HasLineOfSight())
+        if (!isAttacking)
             StartCoroutine(ActionAttack());
     }
 
@@ -112,7 +114,6 @@ public class RedArcher : MonoBehaviour, IBaseEnemy
 
     public void Dead()
     {
-        animator.Play("Stop");
         GameObject wreckClone = (GameObject)Instantiate(prefabDead, transform.position, transform.rotation);
         wreckClone.transform.localScale = transform.localScale;
         Destroy(wreckClone, 3);

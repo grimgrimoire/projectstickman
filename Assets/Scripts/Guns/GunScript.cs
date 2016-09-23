@@ -24,7 +24,7 @@ public class GunScript : MonoBehaviour, IShootBullet
     public GunScript()
     {
         gunFire = AutomaticGunFire();
-        targetMask = ConstMask.MASK_ENEMY | ConstMask.MASK_WORLD | ConstMask.MASK_PROJECTILE | ConstMask.MASK_SPAWNAREA;
+        targetMask = ConstMask.MASK_ENEMY | ConstMask.MASK_WORLD | ConstMask.MASK_SPAWNAREA;
     }
 
     void Start()
