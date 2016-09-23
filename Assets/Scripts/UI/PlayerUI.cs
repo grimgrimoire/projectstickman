@@ -104,10 +104,33 @@ public class PlayerUI : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if(eventData.pointerEnter!=null)
-        if (eventData.pointerEnter.name == "EquipedWeapon")
+        if (eventData.pointerEnter != null)
         {
-            gameSystem.ChangeWeapon(WeaponsList.Pistol());
+            if (eventData.pointerEnter.name == "Carbin")
+            {
+                gameSystem.ChangeWeapon(WeaponsList.Carbin());
+                eventData.pointerEnter.name = "Pistol";
+            }
+            else if (eventData.pointerEnter.name == "Pistol")
+            {
+                gameSystem.ChangeWeapon(WeaponsList.Pistol());
+                eventData.pointerEnter.name = "Carbin";
+            }
+            else if (eventData.pointerEnter.name == "Revolver")
+            {
+                gameSystem.ChangeWeapon(WeaponsList.Revolver());
+                eventData.pointerEnter.name = "Carbin";
+            }
+            else if (eventData.pointerEnter.name == "Shotgun")
+            {
+                gameSystem.ChangeWeapon(WeaponsList.Shotgun());
+                eventData.pointerEnter.name = "Carbin";
+            }
+            else if (eventData.pointerEnter.name == "Magnum")
+            {
+                gameSystem.ChangeWeapon(WeaponsList.Magnum());
+                eventData.pointerEnter.name = "Carbin";
+            }
         }
     }
 
