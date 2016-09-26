@@ -596,6 +596,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 2000
   healthBarParent: {fileID: 0}
+  isBoss: 1
 --- !u!114 &114000014294553842
 MonoBehaviour:
   m_ObjectHideFlags: 1

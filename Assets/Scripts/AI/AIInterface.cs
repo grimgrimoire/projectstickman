@@ -10,6 +10,11 @@ public interface IBaseEnemy
     float AttackRange();
 }
 
+public interface IEnemyRegistry
+{
+    void IsKilled();
+}
+
 public interface IWalking
 {
     bool CanMove();

@@ -87,7 +87,10 @@ public class BaseWalkingEnemy : MonoBehaviour
         }
         if (!ground & isGrounded && !PlayerOnLowerElevation())
         {
-            SmallJump();
+            if (PlayerOnHigherElevation())
+                Jump();
+            else
+                SmallJump();
         }
     }
 

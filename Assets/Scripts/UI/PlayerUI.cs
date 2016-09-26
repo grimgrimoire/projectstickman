@@ -56,16 +56,16 @@ public class PlayerUI : MonoBehaviour, IPointerDownHandler
 
     public void PlayerTakeDamage(int damage)
     {
-        //if (!isInvincible)
-        //{
-        //StartCoroutine(PostHitInvincibility());
-        playerHealth -= damage;
+        if (!isInvincible)
+        {
+            StartCoroutine(PostHitInvincibility());
+            playerHealth -= damage;
         UpdatePlayerHealth();
         if (playerHealth <= 0)
         {
             PlayerDie();
         }
-        //}
+        }
     }
 
     IEnumerator PostHitInvincibility()
@@ -73,6 +73,11 @@ public class PlayerUI : MonoBehaviour, IPointerDownHandler
         isInvincible = true;
         yield return new WaitForSeconds(2);
         isInvincible = false;
+    }
+
+    public void UpdateBossHealth(float percentage)
+    {
+        bossHealthBar.sizeDelta = new Vector2(20, percentage * 220);
     }
 
     public void UpdatePlayerHealth()
