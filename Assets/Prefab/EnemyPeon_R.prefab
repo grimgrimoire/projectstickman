@@ -151,6 +151,7 @@ GameObject:
   - 61: {fileID: 61000011931099122}
   - 114: {fileID: 114000011934351428}
   - 114: {fileID: 114000012270582252}
+  - 114: {fileID: 114000010491975388}
   m_Layer: 11
   m_Name: EnemyPeon_R
   m_TagString: Hostile
@@ -558,6 +559,19 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114000010491975388
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011454260820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c183dbc1250bf1e40a3a0d0abe891de7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkSpeed: 4
+  jumpHeight: 8
 --- !u!114 &114000011934351428
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -569,8 +583,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b45ef1283b171c148a8330f4c22cdc7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 4
-  jumpHeight: 8
   health: 15
   healthBarParent: {fileID: 1000012139763958}
 --- !u!114 &114000012270582252

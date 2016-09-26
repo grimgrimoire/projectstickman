@@ -12,12 +12,12 @@ class WeaponsList
         return pistol;
     }
 
-    public static WeaponsPrefab Carbin()
+    public static WeaponsPrefab Assault()
     {
-        WeaponsPrefab carbin = new WeaponsPrefab(90, 0.2f, 1, 3, 5, 10, true, true);
-        carbin.spriteIndex = 16;
-        carbin.weaponTargetPosition = new Vector2(1.65f, 0.309f);
-        return carbin;
+        WeaponsPrefab Assault = new WeaponsPrefab(90, 0.2f, 1, 3, 5, 10, true, true);
+        Assault.spriteIndex = 16;
+        Assault.weaponTargetPosition = new Vector2(1.65f, 0.309f);
+        return Assault;
     }
 
     public static WeaponsPrefab Shotgun()

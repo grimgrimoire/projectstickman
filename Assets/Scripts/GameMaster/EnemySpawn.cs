@@ -2,24 +2,32 @@
 using System.Collections;
 using System;
 
+public interface IEnemySpawn
+{
+    void AddEnemyNumber(EType type);
+}
+
+public enum EType
+{
+    Untaged, Archer, Knight, Mage, RedKnight, BlueKnight, Lancer1
+}
+
 public class EnemySpawn : MonoBehaviour
 {
+    public GameObject enemyListPrefab;
+    public EType type;
+    public int spawnNumber;
+    public float spawnDelay;
+    public int killRequirement;
 
-    public GameObject[] enemyListPrefab;
-    public int[] spawnNumber;
-    public float[] spawnDelay;
+    IEnumerator spawnNumerator;
+    IEnemySpawn iSpawn;
 
     // Use this for initialization
     void Start()
     {
-        if (enemyListPrefab.Length != spawnNumber.Length && spawnDelay.Length != spawnNumber.Length)
-        {
-            throw new Exception("Enemy list, number & delay needs to match");
-        }
-        else
-        {
-            GameObject.Find("GameSystem").GetComponent<GameSystem>().AddEnemySpawnLocation(this);
-        }
+        spawnNumerator = SpawnEnemyWithInterval();
+        GameSystem.GetGameSystem().AddEnemySpawnLocation(this);
     }
 
     // Update is called once per frame
@@ -28,10 +36,19 @@ public class EnemySpawn : MonoBehaviour
 
     }
 
+    public void SetISpawn(IEnemySpawn gameSystem)
+    {
+        iSpawn = gameSystem;
+    }
+
     public void StartSpawnEnemy()
     {
-        for (int i = 0; i < spawnNumber.Length; i++)
-            StartCoroutine(SpawnEnemyWithInterval(i));
+        StartCoroutine(spawnNumerator);
+    }
+
+    public void StopSpawnEnemy()
+    {
+        StopCoroutine(spawnNumerator);
     }
 
     private void UpdateUI()
@@ -39,14 +56,16 @@ public class EnemySpawn : MonoBehaviour
 
     }
 
-    IEnumerator SpawnEnemyWithInterval(int index)
+    IEnumerator SpawnEnemyWithInterval()
     {
-        while (spawnNumber[index] > 0)
+        while (spawnNumber != 0)
         {
-            yield return new WaitForSeconds(spawnDelay[index]);
-            GameObject instance = Instantiate(enemyListPrefab[index]);
-            instance.transform.position = transform.position;
-            spawnNumber[index]--;
+            yield return new WaitForSeconds(spawnDelay);
+            GameObject instance = Instantiate(enemyListPrefab);
+            instance.GetComponent<BaseEnemy>().SetEType(type);
+            instance.transform.position = new Vector2(transform.position.x, transform.position.y);
+            spawnNumber--;
+            iSpawn.AddEnemyNumber(type);
         }
     }
 }

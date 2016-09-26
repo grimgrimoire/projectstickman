@@ -20,6 +20,7 @@ public class PlayerUI : MonoBehaviour, IPointerDownHandler
     public float playerHealth = 100;
     private float playerFullHealth;
     private bool isInvincible = false;
+    private int equipedWeapon = 1;
 
     GameSystem gameSystem;
 
@@ -44,6 +45,7 @@ public class PlayerUI : MonoBehaviour, IPointerDownHandler
         curtain.SetActive(false);
         mainLabel.enabled = false;
         gameSystem.StartGame();
+        gameSystem.ChangeWeapon(WeaponsList.Assault());
     }
 
     // Update is called once per frame
@@ -54,16 +56,16 @@ public class PlayerUI : MonoBehaviour, IPointerDownHandler
 
     public void PlayerTakeDamage(int damage)
     {
-        if (!isInvincible)
+        //if (!isInvincible)
+        //{
+        //StartCoroutine(PostHitInvincibility());
+        playerHealth -= damage;
+        UpdatePlayerHealth();
+        if (playerHealth <= 0)
         {
-            StartCoroutine(PostHitInvincibility());
-            playerHealth -= damage;
-            UpdatePlayerHealth();
-            if (playerHealth <= 0)
-            {
-                PlayerDie();
-            }
+            PlayerDie();
         }
+        //}
     }
 
     IEnumerator PostHitInvincibility()
@@ -75,7 +77,7 @@ public class PlayerUI : MonoBehaviour, IPointerDownHandler
 
     public void UpdatePlayerHealth()
     {
-        playerHealthBar.sizeDelta = new Vector2(playerHealth / playerFullHealth * 300, 50);
+        playerHealthBar.sizeDelta = new Vector2(20, playerHealth / playerFullHealth * 220);
     }
 
     public void PlayerDie()
@@ -105,33 +107,15 @@ public class PlayerUI : MonoBehaviour, IPointerDownHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         if (eventData.pointerEnter != null)
-        {
-            if (eventData.pointerEnter.name == "Carbin")
+            if (eventData.pointerEnter.name == changeWeapon.gameObject.name)
             {
-                gameSystem.ChangeWeapon(WeaponsList.Carbin());
-                eventData.pointerEnter.name = "Pistol";
+                equipedWeapon += 1;
+                equipedWeapon = equipedWeapon % 2;
+                if (equipedWeapon == 1)
+                    gameSystem.ChangeWeapon(WeaponsList.Pistol());
+                else
+                    gameSystem.ChangeWeapon(WeaponsList.Assault());
             }
-            else if (eventData.pointerEnter.name == "Pistol")
-            {
-                gameSystem.ChangeWeapon(WeaponsList.Pistol());
-                eventData.pointerEnter.name = "Carbin";
-            }
-            else if (eventData.pointerEnter.name == "Revolver")
-            {
-                gameSystem.ChangeWeapon(WeaponsList.Revolver());
-                eventData.pointerEnter.name = "Carbin";
-            }
-            else if (eventData.pointerEnter.name == "Shotgun")
-            {
-                gameSystem.ChangeWeapon(WeaponsList.Shotgun());
-                eventData.pointerEnter.name = "Carbin";
-            }
-            else if (eventData.pointerEnter.name == "Magnum")
-            {
-                gameSystem.ChangeWeapon(WeaponsList.Magnum());
-                eventData.pointerEnter.name = "Carbin";
-            }
-        }
     }
 
 }

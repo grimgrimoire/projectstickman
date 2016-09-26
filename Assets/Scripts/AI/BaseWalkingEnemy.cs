@@ -78,6 +78,13 @@ public class BaseWalkingEnemy : MonoBehaviour
         {
             Jump();
         }
+        else if (playerPosition.y - transform.position.y > 4)
+        {
+            if(isGrounded && Mathf.Abs(playerPosition.x - transform.position.x) > 4 && Mathf.Abs(playerPosition.x - transform.position.x) < 7)
+            {
+                Jump();
+            }
+        }
         if (!ground & isGrounded && !PlayerOnLowerElevation())
         {
             SmallJump();
@@ -169,7 +176,7 @@ public class BaseWalkingEnemy : MonoBehaviour
 
     public bool HasLineOfSight()
     {
-        RaycastHit2D ray = Physics2D.Raycast(transform.position, playerPosition - transform.position, Mathf.Infinity, ConstMask.MASK_WORLD | ConstMask.MASK_PLAYER);
+        RaycastHit2D ray = Physics2D.Raycast(transform.position, playerPosition - transform.position, Mathf.Infinity, ConstMask.MASK_WORLD | ConstMask.MASK_PLAYER | ConstMask.MASK_SPAWNAREA);
         if (ray)
             return ray.collider.gameObject.tag == ConstMask.TAG_PLAYER;
         else

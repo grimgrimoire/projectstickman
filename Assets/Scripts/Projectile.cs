@@ -75,7 +75,6 @@ public class Projectile : MonoBehaviour
     {
         if (isPersistOnHit)
         {
-            Debug.Log(collider.gameObject.tag);
             if (collider.gameObject.tag == "World")
             {
                 StopCoroutine(arrowMovement);

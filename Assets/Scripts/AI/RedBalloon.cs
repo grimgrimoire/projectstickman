@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
-public class RedBalloon : MonoBehaviour {
+public class RedBalloon : MonoBehaviour, IBaseEnemy
+{
 
     public float attackRange = 10f;
     //public float aimingDelay = 0.5f;
@@ -11,10 +13,6 @@ public class RedBalloon : MonoBehaviour {
     float distanceFromPlayer;
     private float scale;
     Rigidbody2D rigidBody;
-    public GameObject healthBarParent;
-    RectTransform healthBar;
-    float maxHealth;
-    public float health = 20;
     BoxCollider2D hitbox;
 
     public GameObject arrowPrefab;
@@ -23,28 +21,22 @@ public class RedBalloon : MonoBehaviour {
     float playerPositionY;
     float distanceFromPlayerY;
     GameObject player;
-    bool AttackTrue=false;
+    bool AttackTrue = false;
 
-    void Start () {
+    void Start()
+    {
         player = GameObject.FindGameObjectWithTag("Player");
         rigidBody = GetComponent<Rigidbody2D>();
         scale = transform.localScale.x;
 
-        if (healthBarParent != null)
-            healthBar = healthBarParent.transform.GetChild(0).GetComponent<RectTransform>();
-        maxHealth = health;
     }
-	
-	// Update is called once per frame
-	void Update () {
-        if (health > 0)
-        {
-            UpdatePositions();
-            LookAtPlayer();
-            TryChasePlayer();
-            UpdateHealthBar();
-        }
-        
+
+    // Update is called once per frame
+    void Update()
+    {
+        UpdatePositions();
+        LookAtPlayer();
+        TryChasePlayer();
     }
 
     public void Attack()
@@ -76,7 +68,7 @@ public class RedBalloon : MonoBehaviour {
     public void UpdatePositions()
     {
         playerPosition = player.transform.position;
-        playerPositionY= player.transform.position.y;
+        playerPositionY = player.transform.position.y;
         distanceFromPlayer = Vector3.Distance(transform.position, playerPosition);
         distanceFromPlayerY = Mathf.Abs(transform.position.y - playerPositionY);
     }
@@ -87,7 +79,7 @@ public class RedBalloon : MonoBehaviour {
             transform.localScale = new Vector3(-scale, transform.localScale.y, transform.localScale.z);
         else if (playerPosition.x > transform.position.x)
             transform.localScale = new Vector3(scale, transform.localScale.y, transform.localScale.z);
- 
+
     }
 
     private void TryChasePlayer()
@@ -118,11 +110,12 @@ public class RedBalloon : MonoBehaviour {
         {
             transform.position -= transform.up * moveSpeed * Time.deltaTime;
         }
-        else if (distanceFromPlayerY < Height-1)
+        else if (distanceFromPlayerY < Height - 1)
         {
             transform.position += transform.up * moveSpeed * Time.deltaTime;
-            
-        }else if (distanceFromPlayer >= attackRange)
+
+        }
+        else if (distanceFromPlayer >= attackRange)
         {
             if (playerPosition.x < transform.position.x)
                 transform.position -= transform.right * moveSpeed * Time.deltaTime;
@@ -131,31 +124,32 @@ public class RedBalloon : MonoBehaviour {
         }
         else
             StopMoving();
-            Attack();
+        Attack();
     }
     private void StopMoving()
     {
         rigidBody.velocity = new Vector2(0, 0);
     }
 
-    private void UpdateHealthBar()
+    public bool CanMove()
     {
-        if (healthBarParent != null)
-        {
-            healthBarParent.transform.localScale = transform.localScale;
-            healthBarParent.transform.position = Camera.main.WorldToScreenPoint(transform.position + 2*Vector3.up);
-            healthBar.sizeDelta = new Vector2((health / maxHealth) * 100, 5);
-        }
+        return false;
     }
 
-    public void TakeDamage(int damage, Vector2 hit)
+    public void WalkAnimation()
     {
-        health -= damage;
-        UpdateHealthBar();
-        if (health <= 0)
-        {
-            
-        }
-        //GameObject.Find("UI").GetComponent<DamageTextHandler>().ShowDamage(damage, transform.position);
+    }
+
+    public void StopWalking()
+    {
+    }
+
+    public void Dead()
+    {
+    }
+
+    public float AttackRange()
+    {
+        return attackRange;
     }
 }
