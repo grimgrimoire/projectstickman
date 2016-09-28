@@ -146,8 +146,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013158199656}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.5, y: 14.1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 11.21, y: 5.3, z: 0}
+  m_LocalScale: {x: 0.6192894, y: 0.6192893, z: 0.6192893}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 4000010265660378}
@@ -253,8 +253,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abe025344b114d346b055ea00da079a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRange: 10
-  Height: 10
+  attackRange: 12
+  Height: 9
   attackDelay: 5
   moveSpeed: 7
   arrowPrefab: {fileID: 1000010922436130, guid: 08920b2d8c7a7a04eaee353fb1204f9a,
