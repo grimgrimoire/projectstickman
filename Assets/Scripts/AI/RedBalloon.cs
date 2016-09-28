@@ -14,6 +14,7 @@ public class RedBalloon : MonoBehaviour, IBaseEnemy
     private float scale;
     Rigidbody2D rigidBody;
     BoxCollider2D hitbox;
+    public GameObject prefabDead;
 
     public GameObject arrowPrefab;
     bool isAttacking;
@@ -146,6 +147,9 @@ public class RedBalloon : MonoBehaviour, IBaseEnemy
 
     public void Dead()
     {
+        GameObject wreckClone = (GameObject)Instantiate(prefabDead, transform.position, transform.rotation);
+        wreckClone.transform.localScale = transform.localScale;
+        Destroy(wreckClone, 5);
     }
 
     public float AttackRange()

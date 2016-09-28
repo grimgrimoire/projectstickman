@@ -19,7 +19,9 @@ public class LoadoutUI : MonoBehaviour, IPointerClickHandler
     // Use this for initialization
     void Start()
     {
+        ClearList();
         LoadPrimaryWeapon();
+
     }
 
     // Update is called once per frame
@@ -47,10 +49,26 @@ public class LoadoutUI : MonoBehaviour, IPointerClickHandler
             Transform find = weaponListParent.FindChild(eventData.pointerEnter.name);
             if (find != null)
             {
-                int index = find.GetSiblingIndex();
-                Debug.Log("Item in index " + index);
+                if (isPrimaryList)
+                    ChangePrimaryWeapon(find.GetSiblingIndex());
+                else
+                    ChangeSecondaryWeapon(find.GetSiblingIndex());
             }
         }
+    }
+
+    private void ChangePrimaryWeapon(int index)
+    {
+        WeaponsPrefab temp = WeaponsList.GetPrimaryWeaponOnIndex(index);
+        primaryName.text = temp.name;
+        primary.sprite = Resources.LoadAll<Sprite>("Images/Weapon1")[temp.spriteIndex];
+    }
+
+    private void ChangeSecondaryWeapon(int index)
+    {
+        WeaponsPrefab temp = WeaponsList.GetSecondaryWeaponOnIndex(index);
+        secondaryName.text = temp.name;
+        secondary.sprite = Resources.LoadAll<Sprite>("Images/Weapon1")[temp.spriteIndex];
     }
 
     public void LoadPrimaryWeapon()
