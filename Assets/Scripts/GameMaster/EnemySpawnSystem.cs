@@ -8,6 +8,9 @@ public class EnemySpawnSystem : MonoBehaviour {
     List<EnemySpawnRegister> spawnRegistry = new List<EnemySpawnRegister>();
     List<EnemySpawnNew> tempSpawnList = new List<EnemySpawnNew>();
 
+    public GameObject bossPrefab;
+    public Transform bossSpawnArea;
+
     public int killUntilBoss;
     private int totalKill;
 
@@ -65,6 +68,32 @@ public class EnemySpawnSystem : MonoBehaviour {
             }
         }
         totalKill++;
+        if (IsObjectiveCleared())
+        {
+            SpawnBoss();
+        }
+    }
+
+    private bool IsObjectiveCleared()
+    {
+        if (IsTotalKillReached())
+        {
+            foreach(EnemySpawnRegister registry in spawnRegistry)
+            {
+                if (!registry.IsAllKilled())
+                    return false;
+            }
+            return true;
+        }
+        else
+            return false;
+    }
+
+    private void SpawnBoss()
+    {
+        Debug.Log("SPAWN BOSS!!");
+        GameObject instance = Instantiate(bossPrefab);
+        bossPrefab.transform.position = bossSpawnArea.position;
     }
 
     public void StartSpawn()

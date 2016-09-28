@@ -5,6 +5,7 @@ using System;
 public class Boss1 : MonoBehaviour, IBaseEnemy
 {
     public float walkSpeed = 2;
+    public GameObject shockwavePrefab;
     GameObject player;
     Vector3 playerPosition;
     float distanceFromPlayer;
@@ -148,10 +149,10 @@ public class Boss1 : MonoBehaviour, IBaseEnemy
             {
                 StartCoroutine(Attack4());
             }
-            else if (distanceFromPlayer < 7 && distanceFromPlayer > 5)
+            /*else if (distanceFromPlayer < 7 && distanceFromPlayer > 5)
             {
                 StartCoroutine(Attack2());
-            }
+            }*/
             else
             {
                 if (UnityEngine.Random.Range(1, 11) > 6)
@@ -179,9 +180,9 @@ public class Boss1 : MonoBehaviour, IBaseEnemy
         SetAttackAnimation(2);
         canMove = false;
         yield return new WaitForSeconds(2 * speedModifier);
-        SetAttackAnimation(4);
+        //SetAttackAnimation(4);
         float delta = 0.5f;
-        walkSpeed = 20;
+        walkSpeed = 40;
         while (delta > 0)
         {
             delta -= Time.deltaTime;
@@ -229,6 +230,8 @@ public class Boss1 : MonoBehaviour, IBaseEnemy
         {
             yield return new WaitForEndOfFrame();
         }
+        GameObject shockwave = Instantiate(shockwavePrefab);
+        shockwave.transform.position = Physics2D.Raycast(transform.position, Vector2.down, 5, ConstMask.MASK_WORLD).point;
         yield return new WaitForSeconds(1f * speedModifier);
         yield return AttackDone();
     }

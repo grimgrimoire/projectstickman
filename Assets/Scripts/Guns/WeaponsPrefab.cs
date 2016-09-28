@@ -6,6 +6,7 @@ using System.Text;
 
 public class WeaponsPrefab
 {
+    public string name;
     public float accuracy;
     public float fireRateDelay;
     public int bulletPerShot;
@@ -22,15 +23,16 @@ public class WeaponsPrefab
 
     }
 
-    public WeaponsPrefab(float accuracy, float fireRate, int bullets, int minDamage, int maxDamage, float damageFall, bool isTwohanded, bool automatic)
+    public WeaponsPrefab(string name, float accuracy, float fireRateDelay, int bulletPerShot, int minDamage, int maxDamage, float damageFalloff, bool isTwoHanded, bool isAutomatic)
     {
+        this.name = name;
         this.accuracy = accuracy;
-        this.fireRateDelay = fireRate;
-        this.bulletPerShot = bullets;
+        this.fireRateDelay = fireRateDelay;
+        this.bulletPerShot = bulletPerShot;
         this.minDamage = minDamage;
         this.maxDamage = maxDamage;
-        this.damageFalloff = damageFall;
-        this.isTwoHanded = isTwohanded;
-        this.isAutomatic = automatic;
+        this.damageFalloff = damageFalloff;
+        this.isTwoHanded = isTwoHanded;
+        this.isAutomatic = isAutomatic;
     }
 }

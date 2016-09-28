@@ -28,6 +28,11 @@ public class EnemySpawnRegister : MonoBehaviour {
 	
 	}
 
+    public bool IsAllKilled()
+    {
+        return totalActive <= 0;
+    }
+
     public void StartSpawnEnemy()
     {
         if (spawnDelay > 0)
@@ -37,7 +42,8 @@ public class EnemySpawnRegister : MonoBehaviour {
     public void KillOneUnit()
     {
         totalActive--;
-        
+        if (!spawnSystem.IsTotalKillReached())
+            StartCoroutine(spawnRoutine);
     }
 
     IEnumerator SpawnEnemy()
@@ -47,5 +53,6 @@ public class EnemySpawnRegister : MonoBehaviour {
             spawnSystem.Spawn(type, prefab);
             totalActive++;
         }
+        spawnRoutine = SpawnEnemy();
     }
 }
