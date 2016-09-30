@@ -16,4 +16,6 @@ public class ConstMask {
     public const int MASK_SPAWNAREA = 1 << 13;
 
     public const string GAME_SYSTEM = "GameSystem";
+
+    public const int SCENE_MAIN_MENU = 0;
 }

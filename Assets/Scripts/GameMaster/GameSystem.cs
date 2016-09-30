@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using UnityEngine.SceneManagement;
 
 public class GameSystem : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class GameSystem : MonoBehaviour
     private PlayerMovement pMovement;
     private PlayerUI pUI;
     EnemySpawnSystem spawnSystem;
+
+    public bool isPaused = false;
 
     public static GameSystem GetGameSystem()
     {
@@ -30,6 +33,12 @@ public class GameSystem : MonoBehaviour
     void Update()
     {
 
+    }
+
+    public void QuitToTitle()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(ConstMask.SCENE_MAIN_MENU);
     }
 
     public string GetStageName()

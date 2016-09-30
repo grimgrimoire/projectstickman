@@ -24,6 +24,8 @@ public class PlayerMovement : MonoBehaviour
         {
             playerAnimation = GetComponentInChildren<PlayerAnimation>();
         }
+        gun.ChangeWeapon(WeaponsList.GetPrimaryWeaponOnIndex(
+            GameSession.GetSession().GetPlayer().GetPrimaryWeapon()));
     }
 
     // Update is called once per frame

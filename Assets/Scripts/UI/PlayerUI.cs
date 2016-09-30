@@ -6,6 +6,8 @@ using System;
 
 public class PlayerUI : MonoBehaviour, IPointerDownHandler
 {
+    public GameObject gameplayUI;
+    public GameObject pauseUI;
 
     public RectTransform playerHealthBar;
     public RectTransform bossHealthBar;
@@ -32,9 +34,7 @@ public class PlayerUI : MonoBehaviour, IPointerDownHandler
         {
             throw new System.Exception("Fatal error: Game system is not found!!");
         }
-
         playerFullHealth = playerHealth;
-
         StartCoroutine(StartGameSquence());
     }
 
@@ -45,13 +45,50 @@ public class PlayerUI : MonoBehaviour, IPointerDownHandler
         curtain.SetActive(false);
         mainLabel.enabled = false;
         gameSystem.StartGame();
-        gameSystem.ChangeWeapon(WeaponsList.Assault());
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (!gameSystem.isPaused)
+            {
+                PauseGame();
+            }
+            else
+            {
+                UnpauseGame();
+            }
+        }
+    }
 
+    void OnApplicationPause(bool pauseStatus)
+    {
+        if (pauseStatus)
+            PauseGame();
+    }
+
+    public void PauseGame()
+    {
+        Debug.Log("GameisPaused");
+        gameSystem.isPaused = true;
+        Time.timeScale = 0;
+        gameplayUI.SetActive(false);
+        pauseUI.SetActive(true);
+    }
+
+    public void UnpauseGame()
+    {
+        gameSystem.isPaused = false;
+        Time.timeScale = 1;
+        gameplayUI.SetActive(true);
+        pauseUI.SetActive(false);
+    }
+
+    public void QuitToTitle()
+    {
+        gameSystem.QuitToTitle();
     }
 
     public void PlayerTakeDamage(int damage)
@@ -60,11 +97,11 @@ public class PlayerUI : MonoBehaviour, IPointerDownHandler
         {
             StartCoroutine(PostHitInvincibility());
             playerHealth -= damage;
-        UpdatePlayerHealth();
-        if (playerHealth <= 0)
-        {
-            PlayerDie();
-        }
+            UpdatePlayerHealth();
+            if (playerHealth <= 0)
+            {
+                PlayerDie();
+            }
         }
     }
 
@@ -117,9 +154,11 @@ public class PlayerUI : MonoBehaviour, IPointerDownHandler
                 equipedWeapon += 1;
                 equipedWeapon = equipedWeapon % 2;
                 if (equipedWeapon == 1)
-                    gameSystem.ChangeWeapon(WeaponsList.Pistol());
+                    gameSystem.ChangeWeapon(WeaponsList.GetPrimaryWeaponOnIndex(
+            GameSession.GetSession().GetPlayer().GetPrimaryWeapon()));
                 else
-                    gameSystem.ChangeWeapon(WeaponsList.Assault());
+                    gameSystem.ChangeWeapon(WeaponsList.GetSecondaryWeaponOnIndex(
+            GameSession.GetSession().GetPlayer().GetSecondaryWeapon()));
             }
     }
 

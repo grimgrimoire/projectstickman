@@ -15,13 +15,19 @@ public class LoadoutUI : MonoBehaviour, IPointerClickHandler
     public Text secondaryName;
 
     private bool isPrimaryList = true;
+    private int primaryIndex;
+    private int secondaryIndex;
 
     // Use this for initialization
     void Start()
     {
+    }
+
+    void OnEnable()
+    {
         ClearList();
         LoadPrimaryWeapon();
-
+        LoadPlayerEquipment();
     }
 
     // Update is called once per frame
@@ -62,6 +68,7 @@ public class LoadoutUI : MonoBehaviour, IPointerClickHandler
         WeaponsPrefab temp = WeaponsList.GetPrimaryWeaponOnIndex(index);
         primaryName.text = temp.name;
         primary.sprite = Resources.LoadAll<Sprite>("Images/Weapon1")[temp.spriteIndex];
+        primaryIndex = index;
     }
 
     private void ChangeSecondaryWeapon(int index)
@@ -69,6 +76,13 @@ public class LoadoutUI : MonoBehaviour, IPointerClickHandler
         WeaponsPrefab temp = WeaponsList.GetSecondaryWeaponOnIndex(index);
         secondaryName.text = temp.name;
         secondary.sprite = Resources.LoadAll<Sprite>("Images/Weapon1")[temp.spriteIndex];
+        secondaryIndex = index;
+    }
+
+    public void SavePlayerEquipment()
+    {
+        GameSession.GetSession().GetPlayer().SetPrimarySecondary(primaryIndex, secondaryIndex);
+        GameSession.GetSession().SaveEquipment();
     }
 
     public void LoadPrimaryWeapon()
@@ -104,6 +118,14 @@ public class LoadoutUI : MonoBehaviour, IPointerClickHandler
         Text name = instance.GetComponentInChildren<Text>();
         name.text = weapon.name;
         image.sprite = Resources.LoadAll<Sprite>("Images/Weapon1")[weapon.spriteIndex];
+    }
+
+    private void LoadPlayerEquipment()
+    {
+        primaryIndex = GameSession.GetSession().GetPlayer().GetPrimaryWeapon();
+        secondaryIndex = GameSession.GetSession().GetPlayer().GetSecondaryWeapon();
+        ChangePrimaryWeapon(primaryIndex);
+        ChangeSecondaryWeapon(secondaryIndex);
     }
 
 }

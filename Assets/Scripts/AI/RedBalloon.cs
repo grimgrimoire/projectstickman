@@ -22,7 +22,6 @@ public class RedBalloon : MonoBehaviour, IBaseEnemy
     float playerPositionY;
     float distanceFromPlayerY;
     GameObject player;
-    bool AttackTrue = false;
 
     void Start()
     {

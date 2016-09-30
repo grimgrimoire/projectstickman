@@ -2,39 +2,49 @@
 using System.Collections;
 using UnityEngine.EventSystems;
 
-public class AimPad : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler {
+public class AimPad : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
+{
 
-	static float MOVE_RANGE = 80;
+    static float MOVE_RANGE = 80;
 
-	public GameObject player;
+    public GameObject player;
 
-	PlayerMovement playerMove;
-	public RectTransform joystickImage;
-	float globalXDefault;
-	float globalYDefault;
+    PlayerMovement playerMove;
+    public RectTransform joystickImage;
+    float globalXDefault;
+    float globalYDefault;
 
-	// Use this for initialization
-	void Start () {
-		globalXDefault = joystickImage.position.x;
-		globalYDefault = joystickImage.position.y;
-		playerMove = player.GetComponent<PlayerMovement> ();
-        if(player == null)
+    // Use this for initialization
+    void Start()
+    {
+        globalXDefault = joystickImage.position.x;
+        globalYDefault = joystickImage.position.y;
+        playerMove = player.GetComponent<PlayerMovement>();
+        if (player == null)
         {
             GameObject.FindGameObjectWithTag(ConstMask.TAG_PLAYER);
         }
-	}
+    }
 
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update()
+    {
 
-	}
+    }
 
-	public void OnDrag (PointerEventData data)
-	{
-		UpdateButtonPosition (data);
+    void OnEnable()
+    {
+        joystickImage.anchoredPosition = Vector2.zero;
+        if(playerMove!=null)
+            playerMove.RemoveTrigger();
+    }
+
+    public void OnDrag(PointerEventData data)
+    {
+        UpdateButtonPosition(data);
         UpdatePlayerLook();
-        playerMove.UpdateAim (GetAngle());
-	}
+        playerMove.UpdateAim(GetAngle());
+    }
 
     private void UpdatePlayerLook()
     {
@@ -44,43 +54,43 @@ public class AimPad : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDr
             playerMove.LookRight();
     }
 
-	public void OnPointerUp (PointerEventData data)
-	{
-		playerMove.RemoveTrigger ();
-		joystickImage.anchoredPosition = Vector2.zero;
-		//playerMove.UpdateAim (90);
-	}
+    public void OnPointerUp(PointerEventData data)
+    {
+        playerMove.RemoveTrigger();
+        joystickImage.anchoredPosition = Vector2.zero;
+        //playerMove.UpdateAim (90);
+    }
 
-	public void OnPointerDown (PointerEventData data)
-	{
+    public void OnPointerDown(PointerEventData data)
+    {
         UpdateButtonPosition(data);
         UpdatePlayerLook();
         playerMove.UpdateAim(GetAngle());
-        playerMove.HoldTrigger ();
+        playerMove.HoldTrigger();
     }
 
 
-	private void UpdateButtonPosition (PointerEventData data)
-	{
-		Vector2 newPos = Vector2.zero;
-		float delta = data.position.x - globalXDefault;
-		delta = Mathf.Clamp (delta, -MOVE_RANGE, MOVE_RANGE);
-		newPos.x = delta;
-		delta = data.position.y - globalYDefault;
-		delta = Mathf.Clamp (delta, -MOVE_RANGE, MOVE_RANGE);
-		newPos.y = delta;
-		joystickImage.anchoredPosition = newPos;
-	}
+    private void UpdateButtonPosition(PointerEventData data)
+    {
+        Vector2 newPos = Vector2.zero;
+        float delta = data.position.x - globalXDefault;
+        delta = Mathf.Clamp(delta, -MOVE_RANGE, MOVE_RANGE);
+        newPos.x = delta;
+        delta = data.position.y - globalYDefault;
+        delta = Mathf.Clamp(delta, -MOVE_RANGE, MOVE_RANGE);
+        newPos.y = delta;
+        joystickImage.anchoredPosition = newPos;
+    }
 
-	private float GetAngle ()
-	{
-		float angle = Vector2.Angle (Vector2.down, joystickImage.anchoredPosition);
-		//if (angle > 90) {
-		//	angle = 180 - angle;
-		//}
-		//if (joystickImage.anchoredPosition.y < 0)
-		//	angle = -angle;
-		return angle;
-	}
+    private float GetAngle()
+    {
+        float angle = Vector2.Angle(Vector2.down, joystickImage.anchoredPosition);
+        //if (angle > 90) {
+        //	angle = 180 - angle;
+        //}
+        //if (joystickImage.anchoredPosition.y < 0)
+        //	angle = -angle;
+        return angle;
+    }
 
 }

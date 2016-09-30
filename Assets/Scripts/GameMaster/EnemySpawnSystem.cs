@@ -94,7 +94,7 @@ public class EnemySpawnSystem : MonoBehaviour {
         Debug.Log("SPAWN BOSS!!");
         if (bossPrefab != null) {
             GameObject instance = Instantiate(bossPrefab);
-            bossPrefab.transform.position = bossSpawnArea.position;
+            instance.transform.position = bossSpawnArea.position;
         }
     }
 
