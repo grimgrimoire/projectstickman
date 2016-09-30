@@ -10,23 +10,25 @@ public class EnemySpawnRegister : MonoBehaviour {
     public int killRequirement;
     public int increaseSpeedKill;
     public float increaseSpawnSpeed;
+    public int TotalEnemy;
 
     private int totalActive = 0;
 
     EnemySpawnSystem spawnSystem;
-    IEnumerator spawnRoutine;
+    bool isCoroutineActive = false;
+    
 
 	// Use this for initialization
 	void Start () {
         spawnSystem = GetComponent<EnemySpawnSystem>();
         spawnSystem.RegisterEnemyRegistry(this);
-        spawnRoutine = SpawnEnemy();
+        
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
-	}
+
+    }
 
     public bool IsAllKilled()
     {
@@ -42,17 +44,26 @@ public class EnemySpawnRegister : MonoBehaviour {
     public void KillOneUnit()
     {
         totalActive--;
-        if (!spawnSystem.IsTotalKillReached())
-            StartCoroutine(spawnRoutine);
+        if (!spawnSystem.IsTotalKillReached() && !isCoroutineActive)
+            StartCoroutine(SpawnEnemy());
     }
 
     IEnumerator SpawnEnemy()
     {
-        while (true && totalActive < maximumNumber && killRequirement <= spawnSystem.GetTotalKill()) {
+        isCoroutineActive = true;
+        while (true) {
             yield return new WaitForSeconds(spawnDelay);
-            spawnSystem.Spawn(type, prefab);
-            totalActive++;
+            if (totalActive < maximumNumber && killRequirement <= spawnSystem.GetTotalKill() && !spawnSystem.IsTotalKillReached() && (TotalEnemy>0 || TotalEnemy == 999))
+            {
+                spawnSystem.Spawn(type, prefab);
+                totalActive++;
+                if (TotalEnemy != 999)
+                { TotalEnemy--; }
+            }
+            else
+                break;
+
         }
-        spawnRoutine = SpawnEnemy();
+        isCoroutineActive = false;
     }
 }

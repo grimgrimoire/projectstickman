@@ -234,6 +234,7 @@ public class Boss1 : MonoBehaviour, IBaseEnemy
         shockwave.transform.position = Physics2D.Raycast(transform.position, Vector2.down, 5, ConstMask.MASK_WORLD).point;
         yield return new WaitForSeconds(1f * speedModifier);
         yield return AttackDone();
+        Destroy(shockwave, 3);
     }
 
     IEnumerator AttackDone()

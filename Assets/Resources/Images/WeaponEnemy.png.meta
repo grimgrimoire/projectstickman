@@ -1,11 +1,14 @@
 fileFormatVersion: 2
 guid: 16ed9b33a476c0245be4ab72cde4e976
-timeCreated: 1472547827
+timeCreated: 1475047801
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: Sword
     21300002: Bow
+    21300004: Sword
+    21300006: Bow
+    21300008: Spear
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -60,10 +63,10 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 1
-        width: 151
+        width: 150
         height: 599
       alignment: 9
-      pivot: {x: 0.48904476, y: 0.8783532}
+      pivot: {x: 0.51057446, y: 0.87337244}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -71,12 +74,25 @@ TextureImporter:
       name: Bow
       rect:
         serializedVersion: 2
-        x: 265
+        x: 264
         y: 55
         width: 79
         height: 506
-      alignment: 9
-      pivot: {x: 0.3534202, y: 0.4901921}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Spear
+      rect:
+        serializedVersion: 2
+        x: 466
+        y: 14
+        width: 39
+        height: 587
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

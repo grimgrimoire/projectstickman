@@ -21,7 +21,8 @@ public class EnemySpawnSystem : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	}
+     
+    }
 
     public int GetTotalKill()
     {
@@ -59,14 +60,21 @@ public class EnemySpawnSystem : MonoBehaviour {
 
     public void AddKillCount(EType type)
     {
+        
         foreach(EnemySpawnRegister registry in spawnRegistry)
         {
-            if(registry.type == type)
+            if (totalKill+1 == registry.killRequirement)
+            {
+                registry.StartSpawnEnemy();
+            }
+
+            if (registry.type == type)
             {
                 registry.KillOneUnit();
-                break;
+                //break;
             }
         }
+
         totalKill++;
         if (IsObjectiveCleared())
         {

@@ -268,10 +268,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000010967414172}
   - 212: {fileID: 212000011769269866}
-  - 61: {fileID: 61000011107532912}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Shield
-  m_TagString: World
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -323,7 +322,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013530855324}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.2610445, y: 6.881366, z: 0}
+  m_LocalPosition: {x: 13.009974, y: -2.3201175, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -475,20 +474,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &61000011107532912
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013767510766}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_Offset: {x: -0.27097717, y: -0.011660844}
-  serializedVersion: 2
-  m_Size: {x: 0.5824697, y: 3.4423316}
 --- !u!61 &61000012965969856
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -603,8 +588,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b45ef1283b171c148a8330f4c22cdc7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 20
+  health: 50
   healthBarParent: {fileID: 1000012849960566}
+  isBoss: 0
 --- !u!114 &114000013688632026
 MonoBehaviour:
   m_ObjectHideFlags: 1
