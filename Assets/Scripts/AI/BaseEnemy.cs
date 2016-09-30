@@ -8,6 +8,7 @@ public class BaseEnemy : MonoBehaviour
 
     public float health = 100;
     public GameObject healthBarParent;
+    public bool isBoss;
 
     GameObject player;
     Vector3 playerPosition;
@@ -71,8 +72,7 @@ public class BaseEnemy : MonoBehaviour
         {
             iBaseEnemy.Dead();
             StartCoroutine(Unspawn());
-            GameSystem.GetGameSystem().AddKillCount(1);
-            GameSystem.GetGameSystem().KillEnemyOfType(eType);
+            GameSystem.GetGameSystem().AddKillCount(eType);
         }
         //GameObject.Find("UI").GetComponent<DamageTextHandler>().ShowDamage(damage, transform.position);
     }
@@ -96,7 +96,11 @@ public class BaseEnemy : MonoBehaviour
 
     private void UpdateHealthBar()
     {
-        if (healthBarParent != null)
+        if (isBoss)
+        {
+            GameSystem.GetGameSystem().GetPlayerUI().UpdateBossHealth(health/maxHealth);
+        }
+        else if (healthBarParent != null)
         {
             healthBarParent.transform.localScale = transform.localScale;
             healthBarParent.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.up);

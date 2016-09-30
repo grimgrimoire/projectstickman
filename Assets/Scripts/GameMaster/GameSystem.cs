@@ -3,22 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
-public class GameSystem : MonoBehaviour, IEnemySpawn
+public class GameSystem : MonoBehaviour
 {
 
     public string stageName = "STAGE_NAME";
     public GameObject player;
     public Transform playerRespawnPoint;
-    public int enemyLimit;
-    public EType[] enemyType;
-    public int[] enemyTypeLimit;
-    public int killUntilBoss;
 
-    private int[] enemyNumberByType;
-    private List<EnemySpawn> enemySpawnerList;
     private PlayerMovement pMovement;
     private PlayerUI pUI;
-    private int totalKill = 0;
+    EnemySpawnSystem spawnSystem;
 
     public static GameSystem GetGameSystem()
     {
@@ -29,8 +23,7 @@ public class GameSystem : MonoBehaviour, IEnemySpawn
     void Start()
     {
         pUI = GameObject.Find("UI").GetComponent<PlayerUI>();
-        enemyNumberByType = new int[enemyType.Length];
-        enemySpawnerList = new List<EnemySpawn>();
+        spawnSystem = GetComponent<EnemySpawnSystem>();
     }
 
     // Update is called once per frame
@@ -44,12 +37,20 @@ public class GameSystem : MonoBehaviour, IEnemySpawn
         return stageName;
     }
 
-    public void AddEnemySpawnLocation(EnemySpawn spawner)
+    public PlayerUI GetPlayerUI()
     {
-        if (enemySpawnerList == null)
-            enemySpawnerList = new List<EnemySpawn>();
-        spawner.SetISpawn(this);
-        enemySpawnerList.Add(spawner);
+        return pUI;
+    }
+
+    public void AddKillCount(EType type)
+    {
+        pUI.AddKillCount(1);
+        spawnSystem.AddKillCount(type);
+    }
+
+    public EnemySpawnSystem GetSpawnSystem()
+    {
+        return spawnSystem;
     }
 
     public void Respawn()
@@ -71,11 +72,7 @@ public class GameSystem : MonoBehaviour, IEnemySpawn
     {
         pMovement = player.GetComponent<PlayerMovement>();
         pMovement.SetAlive(true);
-        foreach (EnemySpawn spawn in enemySpawnerList)
-        {
-            if (spawn.killRequirement == 0)
-                spawn.StartSpawnEnemy();
-        }
+        spawnSystem.StartSpawn();
     }
 
     public void ChangeWeapon(WeaponsPrefab weapon)
@@ -83,98 +80,4 @@ public class GameSystem : MonoBehaviour, IEnemySpawn
         pMovement.ChangeWeapon(weapon);
     }
 
-    public void AddKillCount(int kill)
-    {
-        pUI.AddKillCount(kill);
-        totalKill++;
-        if (totalKill >= killUntilBoss)
-        {
-            StopAllSpawn();
-        }
-        StartSpawnAtKillNumber();
-    }
-
-    public void KillEnemyOfType(EType type)
-    {
-        int index = 0;
-        foreach (EType etype in enemyType)
-        {
-            if (etype == type)
-            {
-                enemyNumberByType[index]--;
-                if (enemyNumberByType[index] < enemyTypeLimit[index])
-                {
-                    StartSpawnType(type);
-                }
-                break;
-            }
-            index += 1;
-        }
-    }
-    private void GetPlayerMovement()
-    {
-        pMovement = player.GetComponent<PlayerMovement>();
-    }
-
-    public void AddEnemyNumber(EType type)
-    {
-        int index = 0;
-        foreach (EType etype in enemyType)
-        {
-            if (etype == type)
-            {
-                enemyNumberByType[index]++;
-                if (enemyNumberByType[index] >= enemyTypeLimit[index])
-                {
-                    StopSpawnType(type);
-                }
-                break;
-            }
-            index += 1;
-        }
-    }
-
-    private void StopSpawnType(EType eType)
-    {
-        foreach (EnemySpawn spawn in enemySpawnerList)
-        {
-            if (spawn.type == eType)
-            {
-                spawn.StopSpawnEnemy();
-            }
-        }
-    }
-
-    private void StopAllSpawn()
-    {
-        foreach (EnemySpawn spawn in enemySpawnerList)
-        {
-            spawn.StopSpawnEnemy();
-        }
-    }
-
-    private void StartSpawnAtKillNumber()
-    {
-        foreach (EnemySpawn spawn in enemySpawnerList)
-        {
-            if (spawn.killRequirement == totalKill)
-            {
-                spawn.StartSpawnEnemy();
-            }
-        }
-    }
-
-    private void StartSpawnType(EType eType)
-    {
-        List<EnemySpawn> temp = new List<EnemySpawn>();
-        foreach (EnemySpawn spawn in enemySpawnerList)
-        {
-            if (spawn.type == eType && spawn.killRequirement <= totalKill && totalKill < killUntilBoss)
-            {
-                temp.Add(spawn);
-            }
-        }
-        if (temp.Count > 0)
-            temp[UnityEngine.Random.Range(0, temp.Count)].StartSpawnEnemy();
-    }
 }
