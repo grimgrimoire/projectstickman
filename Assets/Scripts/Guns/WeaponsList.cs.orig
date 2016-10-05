@@ -35,7 +35,11 @@ class WeaponsList
 
     public static WeaponsPrefab Assault()
     {
+<<<<<<< HEAD
         WeaponsPrefab Assault = new WeaponsPrefab("Assault", 90, 0.15f, 1, 3, 5, 20, true, true);
+=======
+        WeaponsPrefab Assault = new WeaponsPrefab("Assault", 90, 0.2f, 1, 5, 7, 20, true, true);
+>>>>>>> 6335df2b94e6880507ac1c8109d56e91635c0ee8
         Assault.spriteIndex = 16;
         Assault.weaponTargetPosition = new Vector2(1.65f, 0.309f);
         return Assault;

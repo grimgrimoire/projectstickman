@@ -155,10 +155,10 @@ public class Boss1 : MonoBehaviour, IBaseEnemy
             {
                 StartCoroutine(Attack4());
             }
-            /*else if (distanceFromPlayer < 7 && distanceFromPlayer > 5)
+            else if (distanceFromPlayer < 7 && distanceFromPlayer > 5)
             {
                 StartCoroutine(Attack2());
-            }*/
+            }
             else
             {
                 if (UnityEngine.Random.Range(1, 11) > 6)
@@ -187,6 +187,7 @@ public class Boss1 : MonoBehaviour, IBaseEnemy
         canMove = false;
         yield return new WaitForSeconds(2 * speedModifier);
         //SetAttackAnimation(4);
+        StopMoving();
         float delta = 0.5f;
         walkSpeed = 40;
         while (delta > 0)
