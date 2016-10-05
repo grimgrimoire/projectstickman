@@ -33,7 +33,7 @@ class WeaponsList
 
     public static WeaponsPrefab Assault()
     {
-        WeaponsPrefab Assault = new WeaponsPrefab("Assault", 90, 0.2f, 1, 3, 5, 20, true, true);
+        WeaponsPrefab Assault = new WeaponsPrefab("Assault", 90, 0.2f, 1, 5, 7, 20, true, true);
         Assault.spriteIndex = 16;
         Assault.weaponTargetPosition = new Vector2(1.65f, 0.309f);
         return Assault;
@@ -51,7 +51,7 @@ class WeaponsList
 
     public static WeaponsPrefab Pistol()
     {
-        WeaponsPrefab pistol = new WeaponsPrefab("Pistol", 100, 0.5f, 1, 7, 10, 20, false, false);
+        WeaponsPrefab pistol = new WeaponsPrefab("Pistol", 100, 0.5f, 1, 10, 13, 20, false, false);
         pistol.spriteIndex = 10;
         pistol.weaponTargetPosition = new Vector2(0.48f, 0.12f);
         return pistol;
