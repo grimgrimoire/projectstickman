@@ -17,5 +17,9 @@ public class ConstMask {
 
     public const string GAME_SYSTEM = "GameSystem";
 
+    public const string NAME_STAGE_1 = "MEDIEVAL";
+
     public const int SCENE_MAIN_MENU = 0;
+
+    public const int SCENE_STAGE_1 = 1;
 }

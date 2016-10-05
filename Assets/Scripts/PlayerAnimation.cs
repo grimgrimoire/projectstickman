@@ -8,9 +8,12 @@ public class PlayerAnimation : MonoBehaviour
     //int walkHash = Animator.StringToHash("Walk");
     //int Stop = Animator.StringToHash("Stop");
 
-    public void StartWalking()
+    public void StartWalking(bool isToFront)
     {
-        anim.Play("Walk");
+        if (isToFront)
+            anim.Play("Walk");
+        else
+            anim.Play("BackWalk");
     }
 
     public void SetHoldingAnimation(bool isTwoHanded)

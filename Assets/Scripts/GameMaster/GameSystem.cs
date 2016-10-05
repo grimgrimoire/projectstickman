@@ -68,6 +68,12 @@ public class GameSystem : MonoBehaviour
         player.transform.position = playerRespawnPoint.position;
     }
 
+    public void BossDead()
+    {
+        pUI.GameWin();
+        GameSession.GetSession().SaveScore(ConstMask.NAME_STAGE_1, "100000");
+    }
+
     public void GameOver()
     {
         pMovement.SetAlive(false);

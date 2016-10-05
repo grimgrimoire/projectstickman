@@ -46,6 +46,14 @@ public class MovePad : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, ID
             playerMove.Stop();
     }
 
+    void OnDisable()
+    {
+        isPointerDown = false;
+        joystickImage.anchoredPosition = Vector2.zero;
+        if (playerMove != null)
+            playerMove.Stop();
+    }
+
     private void UseKeyboard()
     {
         if (Input.GetKey(KeyCode.A))

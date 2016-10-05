@@ -18,6 +18,7 @@ public class Boss1 : MonoBehaviour, IBaseEnemy
 
     private static String ATTACK = "AttackState";
     private static String WALK = "Walk";
+    private static String DEAD = "Dead";
     private float speedModifier = 1f;
 
     // Use this for initialization
@@ -56,6 +57,11 @@ public class Boss1 : MonoBehaviour, IBaseEnemy
 
     public void Dead()
     {
+        SetAttackAnimation(0);
+        StopAllCoroutines();
+        canMove = false;
+        animator.Play(DEAD);
+        StopMoving();
     }
 
     public void StopWalking()

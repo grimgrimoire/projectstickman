@@ -12,6 +12,7 @@ public class GunScript : MonoBehaviour, IShootBullet
     public float damageFalloff;
     public bool isTwoHanded;
     public bool isAutomatic;
+    public int penetration = 1;
     public Transform weaponTarget;
     public GameObject bulletPrefab;
     public Animator animator;
@@ -46,7 +47,9 @@ public class GunScript : MonoBehaviour, IShootBullet
         maxDamage = weapon.maxDamage;
         damageFalloff = weapon.damageFalloff;
         isTwoHanded = weapon.isTwoHanded;
-        isAutomatic = weapon.isAutomatic;
+        //isAutomatic = weapon.isAutomatic;
+        isAutomatic = true;
+        penetration = weapon.penetration;
         weaponTarget.localPosition = weapon.weaponTargetPosition;
         animator.SetBool("IsTwoHanded", isTwoHanded);
         GetComponent<SpriteRenderer>().sprite = Resources.LoadAll<Sprite>("Images/Weapon1")[weapon.spriteIndex];
@@ -86,9 +89,12 @@ public class GunScript : MonoBehaviour, IShootBullet
 
     private void ShootBullets()
     {
-        for(int i=0; i<bulletPerShot; i++)
+        for (int i = 0; i < bulletPerShot; i++)
         {
-            ShootBullet();
+            if (penetration == 1)
+                ShootBullet();
+            else
+                PenetrationBullet();
         }
     }
 
@@ -100,20 +106,49 @@ public class GunScript : MonoBehaviour, IShootBullet
         animator.Play("Shoot", 3);
         if (hit)
         {
-            GameObject bullet = GameObject.Instantiate(bulletPrefab);
-            bullet.transform.position = weaponTarget.position;
-            bullet.transform.rotation = weaponTarget.rotation;
-            bullet.GetComponent<Projectile>().SetTargetPosition(hit.point);
-            if (hit.collider.gameObject.tag.Equals(ConstMask.TAG_ENEMY))
-            {
-                if (Vector2.Distance(weaponTarget.position, hit.point) < damageFalloff)
-                    hit.collider.gameObject.GetComponent<BaseEnemy>().TakeDamage(Random.Range(minDamage, maxDamage), hit.point);
-            }
+            CreateBulletObject(hit.point);
+            BulletHitAction(hit);
             //if (hit.collider.gameObject.tag.Equals(ConstMask.TAG_PROJECTILE))
             //{
             //    Destroy(hit.collider.gameObject);
             //}
         }
+    }
+
+    private void PenetrationBullet()
+    {
+        Vector2 target = weaponTarget.transform.right * player.localScale.x;
+        target += (Random.insideUnitCircle) * (1 - (accuracy * 0.01f));
+        RaycastHit2D[] multiHit = Physics2D.RaycastAll(weaponTarget.transform.position, target, Mathf.Infinity, targetMask);
+        int totalHit = 0;
+        foreach(RaycastHit2D hit in multiHit)
+        {
+            totalHit++;
+            BulletHitAction(hit);
+            if (totalHit == penetration || totalHit == multiHit.Length || hit.collider.tag == ConstMask.TAG_WORLD) {
+                CreateBulletObject(hit.point);
+                break;
+            }
+        }
+    }
+
+    private void BulletHitAction(RaycastHit2D hit)
+    {
+        if (hit.collider.gameObject.tag.Equals(ConstMask.TAG_ENEMY))
+        {
+            if (Vector2.Distance(weaponTarget.position, hit.point) < damageFalloff)
+                hit.collider.gameObject.GetComponent<BaseEnemy>().TakeDamage(Random.Range(minDamage, maxDamage), hit.point);
+        }
+    }
+
+    private void CreateBulletObject(Vector2 hit)
+    {
+        GameObject bullet = GameObject.Instantiate(bulletPrefab);
+        bullet.transform.position = weaponTarget.position;
+        bullet.transform.rotation = weaponTarget.rotation;
+        if (player.transform.localScale.x < 0)
+            bullet.transform.Rotate(0, 0, 180);
+        bullet.GetComponent<Projectile>().SetTargetPosition(hit);
     }
 
     public void RemoveTrigger()

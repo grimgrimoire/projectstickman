@@ -5,8 +5,8 @@ using UnityEngine;
 class WeaponsList
 {
 
-    public static int TOTAL_PRIMARY = 2;
-    public static int TOTAL_SECONDARY = 3;
+    public static int TOTAL_PRIMARY = 3;
+    public static int TOTAL_SECONDARY = 4;
 
     public static WeaponsPrefab GetSecondaryWeaponOnIndex(int index)
     {
@@ -15,7 +15,8 @@ class WeaponsList
             case 0: return Pistol();
             case 1: return Revolver();
             case 2: return Magnum();
-            default: throw new System.Exception("Weapon index OUT OF BOUNDS!!");
+            case 3: return HighNoon();
+            default: return Pistol();
         }
     }
 
@@ -25,7 +26,8 @@ class WeaponsList
         {
             case 0: return Assault();
             case 1: return Shotgun();
-            default: throw new System.Exception("Weapon index OUT OF BOUNDS!!");
+            case 2: return Hunter();
+            default: return Assault();
         }
     }
 
@@ -33,7 +35,7 @@ class WeaponsList
 
     public static WeaponsPrefab Assault()
     {
-        WeaponsPrefab Assault = new WeaponsPrefab("Assault", 90, 0.2f, 1, 3, 5, 20, true, true);
+        WeaponsPrefab Assault = new WeaponsPrefab("Assault", 90, 0.15f, 1, 3, 5, 20, true, true);
         Assault.spriteIndex = 16;
         Assault.weaponTargetPosition = new Vector2(1.65f, 0.309f);
         return Assault;
@@ -41,10 +43,19 @@ class WeaponsList
 
     public static WeaponsPrefab Shotgun()
     {
-        WeaponsPrefab shotgun = new WeaponsPrefab("Shotgun", 50, 0.8f, 8, 3, 3, 8, true, false);
+        WeaponsPrefab shotgun = new WeaponsPrefab("Shotgun", 70, 0.8f, 8, 3, 3, 8, true, false);
         shotgun.spriteIndex = 18;
         shotgun.weaponTargetPosition = new Vector2(1.6f, 0.2f);
         return shotgun;
+    }
+
+    public static WeaponsPrefab Hunter()
+    {
+        WeaponsPrefab hunter = new WeaponsPrefab("Hunting Rifle", 100, 1, 1, 20, 20, 20, true, false);
+        hunter.spriteIndex = 14;
+        hunter.weaponTargetPosition = new Vector2(1.164f, 0.142f);
+        hunter.penetration = 3;
+        return hunter;
     }
 
     // SECONDARY =============================================================================
@@ -71,6 +82,14 @@ class WeaponsList
         Magnum.spriteIndex = 7;
         Magnum.weaponTargetPosition = new Vector2(0.60f, 0.13f);
         return Magnum;
+    }
+
+    public static WeaponsPrefab HighNoon()
+    {
+        WeaponsPrefab gun = new WeaponsPrefab("HighNoon", 100, 0.15f, 1, 100, 200, 20, false, true);
+        gun.spriteIndex = 2;
+        gun.weaponTargetPosition = new Vector2(0.575f, 0.154f);
+        return gun;
     }
 
 }

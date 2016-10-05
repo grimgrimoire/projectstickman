@@ -7,6 +7,8 @@ public class GameSession
     static string PRIMARY_WEAPON = "PRIMARY_WEAPON";
     static string SECONDARY_WEAPON = "SECONDARY_WEAPON";
 
+    static string SCORE_ = "SCORE";
+
     static GameSession session;
 
     private PlayerProgress player;
@@ -39,6 +41,12 @@ public class GameSession
         }
     }
 
+    public void SaveScore(string stage, string score)
+    {
+        PlayerPrefs.SetString(SCORE_ + stage, score);
+        PlayerPrefs.Save();
+    }
+
     public void SaveGameSession()
     {
 
@@ -60,6 +68,26 @@ public class GameSession
     {
         player.SetPrimary(PlayerPrefs.GetInt(PRIMARY_WEAPON, 0));
         player.SetSecondary(PlayerPrefs.GetInt(SECONDARY_WEAPON, 0));
+    }
+
+    public void DeleteAllScore()
+    {
+        PlayerPrefs.DeleteKey(SCORE_ + ConstMask.NAME_STAGE_1);
+    }
+
+    public string GetScore(string stage)
+    {
+        return PlayerPrefs.GetString(SCORE_  + stage, "No Score");
+    }
+
+    private void LoadStageScore()
+    {
+
+    }
+
+    private void SaveStageScore()
+    {
+
     }
 
     private void CreateDefault()

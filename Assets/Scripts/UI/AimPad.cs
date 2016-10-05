@@ -13,6 +13,7 @@ public class AimPad : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDr
     public RectTransform joystickImage;
     float globalXDefault;
     float globalYDefault;
+    bool isPointerDown;
 
     // Use this for initialization
     void Start()
@@ -29,7 +30,12 @@ public class AimPad : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDr
     // Update is called once per frame
     void Update()
     {
+        if (isPointerDown)
+        {
 
+            UpdatePlayerLook();
+            playerMove.UpdateAim(GetAngle());
+        }
     }
 
     void OnEnable()
@@ -39,11 +45,18 @@ public class AimPad : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDr
             playerMove.RemoveTrigger();
     }
 
+    void OnDisable()
+    {
+        joystickImage.anchoredPosition = Vector2.zero;
+        if (playerMove != null)
+            playerMove.RemoveTrigger();
+    }
+
     public void OnDrag(PointerEventData data)
     {
         UpdateButtonPosition(data);
-        UpdatePlayerLook();
-        playerMove.UpdateAim(GetAngle());
+        //UpdatePlayerLook();
+        //playerMove.UpdateAim(GetAngle());
     }
 
     private void UpdatePlayerLook()
@@ -56,6 +69,7 @@ public class AimPad : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDr
 
     public void OnPointerUp(PointerEventData data)
     {
+        isPointerDown = false;
         playerMove.RemoveTrigger();
         joystickImage.anchoredPosition = Vector2.zero;
         //playerMove.UpdateAim (90);
@@ -67,6 +81,7 @@ public class AimPad : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDr
         UpdatePlayerLook();
         playerMove.UpdateAim(GetAngle());
         playerMove.HoldTrigger();
+        isPointerDown = true;
     }
 
 

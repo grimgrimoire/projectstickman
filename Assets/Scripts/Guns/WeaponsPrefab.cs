@@ -17,6 +17,7 @@ public class WeaponsPrefab
     public bool isAutomatic;
     public Vector2 weaponTargetPosition;
     public int spriteIndex;
+    public int penetration = 1;
 
     public WeaponsPrefab()
     {

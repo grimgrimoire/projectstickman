@@ -66,15 +66,25 @@ public class BaseEnemy : MonoBehaviour
 
     public void TakeDamage(int damage, Vector2 hit)
     {
-        health -= damage;
-        UpdateHealthBar();
-        if (health <= 0)
+        if (health > 0)
         {
-            iBaseEnemy.Dead();
-            StartCoroutine(Unspawn());
-            GameSystem.GetGameSystem().AddKillCount(eType);
+            health -= damage;
+            UpdateHealthBar();
+            if (health <= 0)
+            {
+                iBaseEnemy.Dead();
+                if (isBoss)
+                {
+                    iBaseEnemy.Dead();
+                    GameSystem.GetGameSystem().BossDead();
+                }
+                else
+                {
+                    StartCoroutine(Unspawn());
+                    GameSystem.GetGameSystem().AddKillCount(eType);
+                }
+            }
         }
-        //GameObject.Find("UI").GetComponent<DamageTextHandler>().ShowDamage(damage, transform.position);
     }
 
     IEnumerator RespawnDelay()
@@ -98,7 +108,7 @@ public class BaseEnemy : MonoBehaviour
     {
         if (isBoss)
         {
-            GameSystem.GetGameSystem().GetPlayerUI().UpdateBossHealth(health/maxHealth);
+            GameSystem.GetGameSystem().GetPlayerUI().UpdateBossHealth(health / maxHealth);
         }
         else if (healthBarParent != null)
         {

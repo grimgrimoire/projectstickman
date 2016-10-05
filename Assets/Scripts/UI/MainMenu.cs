@@ -6,7 +6,7 @@ public class MainMenu : MonoBehaviour
 
     public GameObject weaponMenu;
     public GameObject mainMenu;
-
+    public GameObject debugMenu;
 
 
     // Use this for initialization
@@ -23,7 +23,7 @@ public class MainMenu : MonoBehaviour
 
     public void Stage1Button()
     {
-        SceneManager.LoadScene("testscript");
+        SceneManager.LoadScene(ConstMask.SCENE_STAGE_1);
     }
 
     public void ShowLoadoutUI()
@@ -37,6 +37,13 @@ public class MainMenu : MonoBehaviour
         mainMenu.SetActive(true);
         weaponMenu.SetActive(false);
         SaveChange();
+    }
+
+    public void ShowDebugMenu()
+    {
+        mainMenu.SetActive(false);
+        weaponMenu.SetActive(false);
+        debugMenu.SetActive(true);
     }
 
     private void SaveChange()

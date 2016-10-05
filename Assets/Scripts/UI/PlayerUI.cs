@@ -8,6 +8,7 @@ public class PlayerUI : MonoBehaviour, IPointerDownHandler
 {
     public GameObject gameplayUI;
     public GameObject pauseUI;
+    public GameObject winGame;
 
     public RectTransform playerHealthBar;
     public RectTransform bossHealthBar;
@@ -22,6 +23,7 @@ public class PlayerUI : MonoBehaviour, IPointerDownHandler
     public float playerHealth = 100;
     private float playerFullHealth;
     private bool isInvincible = false;
+    private bool isGameStarted = false;
     private int equipedWeapon = 1;
 
     GameSystem gameSystem;
@@ -44,6 +46,7 @@ public class PlayerUI : MonoBehaviour, IPointerDownHandler
         yield return new WaitForSeconds(1f);
         curtain.SetActive(false);
         mainLabel.enabled = false;
+        isGameStarted = true;
         gameSystem.StartGame();
     }
 
@@ -52,11 +55,11 @@ public class PlayerUI : MonoBehaviour, IPointerDownHandler
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (!gameSystem.isPaused)
+            if (!gameSystem.isPaused && isGameStarted)
             {
                 PauseGame();
             }
-            else
+            else if(isGameStarted)
             {
                 UnpauseGame();
             }
@@ -65,7 +68,7 @@ public class PlayerUI : MonoBehaviour, IPointerDownHandler
 
     void OnApplicationPause(bool pauseStatus)
     {
-        if (pauseStatus)
+        if (pauseStatus && isGameStarted)
             PauseGame();
     }
 
@@ -160,6 +163,13 @@ public class PlayerUI : MonoBehaviour, IPointerDownHandler
                     gameSystem.ChangeWeapon(WeaponsList.GetSecondaryWeaponOnIndex(
             GameSession.GetSession().GetPlayer().GetSecondaryWeapon()));
             }
+    }
+
+    public void GameWin()
+    {
+        winGame.SetActive(true);
+        gameplayUI.SetActive(false);
+        isGameStarted = false;
     }
 
 }
